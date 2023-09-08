@@ -1,16 +1,14 @@
 import { useState } from 'react'
-
+import Welcome from './components/Welcome'
+import StoryCard from './components/StoryCard'
 
 function App() {
-  const [count, setCount] = useState(0)
+ 
 
   return (
     <>
-      
-
-      <p >
-       teste test test
-      </p>
+      <Welcome />
+      <StoryCard />
     </>
   )
 }
