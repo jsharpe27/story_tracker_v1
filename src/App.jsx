@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
-import { onSnapshot, addDoc } from 'firebase/firestore'
-import { storiesCollection } from "./firebase"
+import { onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
+import { storiesCollection, db } from "./firebase"
 import Welcome from './components/Welcome'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
@@ -9,7 +9,6 @@ import Card from './components/Card'
 function App() {
  const [newUser, setNewUser] = useState(true)
  const [storyData, setStoryData] = useState([])
-
 
 useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
@@ -30,15 +29,22 @@ async function addStory({title, wordCount, isSubmitted, description}){
         description: description
     }
     await addDoc(storiesCollection, newStory)
-} 
+}
+
+async function deleteStory(storyId){
+   const docRef = doc(db, "stories", storyId)
+   await deleteDoc(docRef)
+}
 
   const storyCardElements = storyData.map(function(story){
     return <Card 
                 key={story.id}
+                id={story.id}
                 title={story.title}
                 wordCount={story.wordCount}
                 isSubmitted={story.isSubmitted}
                 description={story.description}
+                handleDelete={deleteStory}
           />
   })
 
