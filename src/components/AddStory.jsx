@@ -25,7 +25,7 @@ const AddStory = ({handleAddStory}) => {
         </label>
         <hr />
         <p>
-          <label><input type="radio" 
+          <label>Is Submitted?<input type="radio" 
                         name="isSubmitted" 
                         value={true} 
                   />
