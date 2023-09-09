@@ -20,9 +20,12 @@ function App() {
     return unsubscribe
 },[]) */
 
-function addStory({title}){
+function addStory({title, wordCount, isSubmitted, description}){
     const newStory = {
-        title: title
+        title: title,
+        wordCount: wordCount,
+        isSubmitted: isSubmitted,
+        description: description
     }
     setStoryData(prevStories => [newStory, ...prevStories])
     console.log(storyData)
