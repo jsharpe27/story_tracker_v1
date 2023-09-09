@@ -7,7 +7,6 @@ import AddStory from './components/AddStory'
 import Card from './components/Card'
 
 function App() {
- const [newUser, setNewUser] = useState(true)
  const [storyData, setStoryData] = useState([])
 
 useEffect(() => {
@@ -51,7 +50,7 @@ async function deleteStory(storyId){
 
   return (
     <>
-      { newUser && <Welcome />}
+      <Welcome />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
     </>
