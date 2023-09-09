@@ -1,14 +1,45 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { onSnapshot } from 'firebase/firestore'
+import { storiesCollection } from "./firebase"
 import Welcome from './components/Welcome'
-import StoryCard from './components/StoryCard'
+import StoryCards from './components/StoryCards'
+import Card from './components/Card'
 
 function App() {
- 
+ const [newUser, setNewUser] = useState(true)
+ const [storyData, setStoryData] = useState([])
+
+
+/* useEffect(() => {
+    const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
+          const storiesArray = snapshot.docs.map(doc => ({
+              ...doc.data(),
+              id: doc.id
+          }))
+    })
+    return unsubscribe
+},[]) */
+
+function addStory({title}){
+    const newStory = {
+        title: title
+    }
+    setStoryData(prevStories => [newStory, ...prevStories])
+    console.log(storyData)
+} 
+
+
+
 
   return (
     <>
-      <Welcome />
-      <StoryCard />
+      { newUser && <Welcome />}
+      <StoryCards handleAddStory={addStory}>
+        <Card 
+        
+        
+        />
+      </StoryCards>
     </>
   )
 }
