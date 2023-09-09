@@ -1,8 +1,13 @@
 import React from 'react'
 
-const Card = () => {
+const Card = ({title, wordCount, isSubmitted, description}) => {
   return (
-    <div>Cards</div>
+    <>
+      <div>Title:{title}</div>
+      <div>Word count: {wordCount}</div>
+      <div>Submitted: {isSubmitted}</div>
+      <div>Description {description}</div>
+    </>
   )
 }
 

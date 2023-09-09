@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+import { nanoid } from 'nanoid'
 import { onSnapshot } from 'firebase/firestore'
 import { storiesCollection } from "./firebase"
 import Welcome from './components/Welcome'
-import StoryCards from './components/StoryCards'
+import AddStory from './components/AddStory'
 import Card from './components/Card'
 
 function App() {
@@ -22,27 +23,31 @@ function App() {
 
 function addStory({title, wordCount, isSubmitted, description}){
     const newStory = {
+        id: nanoid(),
         title: title,
         wordCount: wordCount,
         isSubmitted: isSubmitted,
         description: description
     }
     setStoryData(prevStories => [newStory, ...prevStories])
-    console.log(storyData)
 } 
 
-
+  const storyCardElements = storyData.map(function(story){
+    return <Card 
+                key={story.id}
+                title={story.title}
+                wordCount={story.wordCount}
+                isSubmitted={story.isSubmitted}
+                description={story.description}
+          />
+  })
 
 
   return (
     <>
       { newUser && <Welcome />}
-      <StoryCards handleAddStory={addStory}>
-        <Card 
-        
-        
-        />
-      </StoryCards>
+      <AddStory handleAddStory={addStory} />
+      {storyCardElements}
     </>
   )
 }
