@@ -1,5 +1,4 @@
 const AddStory = ({handleAddStory}) => {
-
   function handleSubmit(e){
     e.preventDefault()
     const form = e.target;

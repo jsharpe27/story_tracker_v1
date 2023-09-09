@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { nanoid } from 'nanoid'
-import { onSnapshot } from 'firebase/firestore'
+import { onSnapshot, addDoc } from 'firebase/firestore'
 import { storiesCollection } from "./firebase"
 import Welcome from './components/Welcome'
 import AddStory from './components/AddStory'
@@ -11,25 +11,25 @@ function App() {
  const [storyData, setStoryData] = useState([])
 
 
-/* useEffect(() => {
+useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
           const storiesArray = snapshot.docs.map(doc => ({
               ...doc.data(),
               id: doc.id
           }))
+          setStoryData(storiesArray)
     })
     return unsubscribe
-},[]) */
+},[])
 
-function addStory({title, wordCount, isSubmitted, description}){
+async function addStory({title, wordCount, isSubmitted, description}){
     const newStory = {
-        id: nanoid(),
         title: title,
         wordCount: wordCount,
         isSubmitted: isSubmitted,
         description: description
     }
-    setStoryData(prevStories => [newStory, ...prevStories])
+    await addDoc(storiesCollection, newStory)
 } 
 
   const storyCardElements = storyData.map(function(story){
