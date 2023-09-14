@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { nanoid } from 'nanoid'
 import { onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "./firebase"
 import Welcome from './components/Welcome'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
+import AuthDetails from './components/auth/AuthDetails'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
 
@@ -36,10 +38,6 @@ async function deleteStory(storyId){
 }
 
 
-
-
-
-
   const storyCardElements = storyData.map(function(story){
     return <Card 
                 key={story.id}
@@ -55,6 +53,9 @@ async function deleteStory(storyId){
   return (
     <>
       <Welcome />
+      <SignIn />
+      <SignUp />
+      <AuthDetails />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
     </>
