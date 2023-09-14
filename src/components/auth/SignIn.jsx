@@ -2,6 +2,7 @@ import React from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react'
 import { auth } from '../../firebase'
+import { nanoid } from 'nanoid'
 
 const SignIn = () => {
     const [email, setEmail] = useState('')
@@ -22,14 +23,14 @@ const SignIn = () => {
         <form onSubmit={signIn}>
             <h3>Sign In to Trakr!</h3>
             <label htmlFor='email'>Email</label>
-                <input type='email' id='email' 
+                <input type='email' id={nanoid()}
                 placeholder='Enter your email' 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
 
             <label htmlFor='password'>Password</label>
-                <input type='password' id='password' 
+                <input type='password' id={nanoid()} 
                 placeholder='Enter your password' 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
