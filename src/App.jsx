@@ -23,7 +23,9 @@ useEffect(() => {
 },[])
 
 async function addStory({title, wordCount, isSubmitted, description}){
+    const user = auth.currentUser
     const newStory = {
+        userId: user.uid,
         title: title,
         wordCount: wordCount,
         isSubmitted: isSubmitted,
