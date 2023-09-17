@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
-import { nanoid } from 'nanoid'
 import { onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "./firebase"
 import Welcome from './components/Welcome'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
+import AuthDetails from './components/auth/AuthDetails'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
+
 
 function App() {
  const [storyData, setStoryData] = useState([])
@@ -20,24 +23,22 @@ useEffect(() => {
     return unsubscribe
 },[])
 
-async function addStory({title, wordCount, isSubmitted, description}){
-    const newStory = {
-        title: title,
-        wordCount: wordCount,
-        isSubmitted: isSubmitted,
-        description: description
+async function addStory(storyObject){
+    console.log(storyObject)
+   /*  const newStory = {
+        userId: user.uid,
+        title: storyObject.title,
+        wordCount: storyObject.wordCount,
+        isSubmitted: storyObject.isSubmitted,
+        description: storyObject.description
     }
-    await addDoc(storiesCollection, newStory)
+    await addDoc(storiesCollection, newStory) */
 }
 
 async function deleteStory(storyId){
    const docRef = doc(db, "stories", storyId)
    await deleteDoc(docRef)
 }
-
-
-
-
 
 
   const storyCardElements = storyData.map(function(story){
@@ -52,9 +53,13 @@ async function deleteStory(storyId){
           />
   })
 
+//plan is to wrap AuthDetails and AddStory with useContext so that Addstory knows about the user.
   return (
     <>
       <Welcome />
+      <SignIn />
+      <SignUp />
+      <AuthDetails />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
     </>
