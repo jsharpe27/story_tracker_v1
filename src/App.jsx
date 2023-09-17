@@ -7,6 +7,7 @@ import SignUp from './components/auth/SignUp'
 import AuthDetails from './components/auth/AuthDetails'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
+import { AuthProvider } from './context/AuthContext'
 
 
 function App() {
@@ -56,12 +57,14 @@ async function deleteStory(storyId){
 //plan is to wrap AuthDetails and AddStory with useContext so that Addstory knows about the user.
   return (
     <>
+    <AuthProvider>
       <Welcome />
       <SignIn />
       <SignUp />
       <AuthDetails />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
+    </AuthProvider>
     </>
   )
 }
