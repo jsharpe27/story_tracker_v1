@@ -4,7 +4,6 @@ import { storiesCollection, db } from "./firebase"
 import Welcome from './components/Welcome'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-import AuthDetails from './components/auth/AuthDetails'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
 import { AuthProvider } from './context/AuthContext'
@@ -25,15 +24,7 @@ useEffect(() => {
 },[])
 
 async function addStory(storyObject){
-    console.log(storyObject)
-   /*  const newStory = {
-        userId: user.uid,
-        title: storyObject.title,
-        wordCount: storyObject.wordCount,
-        isSubmitted: storyObject.isSubmitted,
-        description: storyObject.description
-    }
-    await addDoc(storiesCollection, newStory) */
+    await addDoc(storiesCollection, storyObject)
 }
 
 async function deleteStory(storyId){
@@ -54,14 +45,12 @@ async function deleteStory(storyId){
           />
   })
 
-//plan is to wrap AuthDetails and AddStory with useContext so that Addstory knows about the user.
   return (
     <>
     <AuthProvider>
       <Welcome />
       <SignIn />
       <SignUp />
-      <AuthDetails />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
     </AuthProvider>
