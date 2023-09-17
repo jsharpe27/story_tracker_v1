@@ -8,6 +8,7 @@ import AuthDetails from './components/auth/AuthDetails'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
 
+
 function App() {
  const [storyData, setStoryData] = useState([])
 
@@ -22,16 +23,16 @@ useEffect(() => {
     return unsubscribe
 },[])
 
-async function addStory({title, wordCount, isSubmitted, description}){
-    const user = auth.currentUser
-    const newStory = {
+async function addStory(storyObject){
+    console.log(storyObject)
+   /*  const newStory = {
         userId: user.uid,
-        title: title,
-        wordCount: wordCount,
-        isSubmitted: isSubmitted,
-        description: description
+        title: storyObject.title,
+        wordCount: storyObject.wordCount,
+        isSubmitted: storyObject.isSubmitted,
+        description: storyObject.description
     }
-    await addDoc(storiesCollection, newStory)
+    await addDoc(storiesCollection, newStory) */
 }
 
 async function deleteStory(storyId){
@@ -52,6 +53,7 @@ async function deleteStory(storyId){
           />
   })
 
+//plan is to wrap AuthDetails and AddStory with useContext so that Addstory knows about the user.
   return (
     <>
       <Welcome />
