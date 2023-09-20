@@ -2,14 +2,25 @@ import React from 'react'
 import { useContext } from 'react'
 import { nanoid } from 'nanoid'
 import { AuthContext } from '../../context/AuthContext'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 const SignIn = () => {
-    const { signIn } = useContext(AuthContext)
     const { email, setEmail } = useContext(AuthContext)
     const { password, setPassword } = useContext(AuthContext)
 
+    const signIn = (e) => {
+        e.preventDefault()
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredentials) => {
+            console.log(userCredentials)
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
   return (
-    <div className='sign-in-container'>
+    <div className=''>
         <form onSubmit={signIn}>
             <h3>Sign In to Trakr!</h3>
             <label htmlFor='email'>Email</label>

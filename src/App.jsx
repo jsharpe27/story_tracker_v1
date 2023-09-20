@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
 import { onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "./firebase"
-import Welcome from './components/Welcome'
+import Header from './components/Header'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
+import UserHeader from './components/UserHeader'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
 import { AuthProvider } from './context/AuthContext'
@@ -48,9 +49,10 @@ async function deleteStory(storyId){
   return (
     <>
     <AuthProvider>
-      <Welcome />
+      <Header />
       <SignIn />
       <SignUp />
+      <UserHeader />
       <AddStory handleAddStory={addStory} />
       {storyCardElements}
     </AuthProvider>
