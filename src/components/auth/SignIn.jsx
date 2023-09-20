@@ -1,22 +1,12 @@
 import React from 'react'
-import { signInWithEmailAndPassword } from 'firebase/auth'
-import { useState } from 'react'
-import { auth } from '../../firebase'
+import { useContext } from 'react'
 import { nanoid } from 'nanoid'
+import { AuthContext } from '../../context/AuthContext'
 
 const SignIn = () => {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-
-    const signIn = (e) => {
-        e.preventDefault()
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials) => {
-            console.log(userCredentials)
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
+    const { signIn } = useContext(AuthContext)
+    const { email, setEmail } = useContext(AuthContext)
+    const { password, setPassword } = useContext(AuthContext)
 
   return (
     <div className='sign-in-container'>

@@ -1,17 +1,24 @@
-import AuthDetails from "./auth/AuthDetails"
+import { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 const AddStory = ({handleAddStory}) => {
+  const {authUser} = useContext(AuthContext)
+  const {userSignOut} = useContext(AuthContext)
+
   function handleSubmit(e){
     e.preventDefault()
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    console.log(authUser)
-    handleAddStory(formJson)
+    const storyObject = { ...formJson, userId: authUser.uid}
+    handleAddStory(storyObject)
   }
 
   return (
+    
     <div>
+      {authUser ? <><h1>Welcome, {authUser.email}</h1><button onClick={userSignOut}>Sign Out</button></> 
+        : <h1>Welcome, Guest</h1>}
       <h3>Add a story</h3>
       <form onSubmit={handleSubmit}>
         <label>
