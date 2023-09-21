@@ -35,7 +35,6 @@ async function deleteStory(storyId){
    await deleteDoc(docRef)
 }
 
-
   const storyCardElements = storyData.map(function(story){
     return <Card 
                 key={story.id}
@@ -45,6 +44,7 @@ async function deleteStory(storyId){
                 isSubmitted={story.isSubmitted}
                 description={story.description}
                 handleDelete={deleteStory}
+                userId={story.userId}
           />
   })
 

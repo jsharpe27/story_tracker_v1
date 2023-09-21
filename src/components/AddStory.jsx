@@ -11,6 +11,7 @@ const AddStory = ({handleAddStory}) => {
     const formJson = Object.fromEntries(formData.entries());
     const storyObject = { ...formJson, userId: authUser.uid}
     handleAddStory(storyObject)
+    console.log(storyObject)
   }
 
   return (
