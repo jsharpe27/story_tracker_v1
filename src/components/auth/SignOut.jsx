@@ -2,10 +2,10 @@ import React from 'react'
 import { useContext } from 'react'
 import { AuthContext } from '../../context/AuthContext'
 import { signOut } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 export default function SignOut() {
-    const { email, setEmail } = useContext(AuthContext)
-    const { password, setPassword } = useContext(AuthContext)
+    
 
     const userSignOut = () => {
         signOut(auth).then(() => {

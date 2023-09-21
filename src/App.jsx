@@ -5,6 +5,7 @@ import './index.css'
 import Header from './components/Header'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
+import SignOut from './components/auth/SignOut'
 import UserHeader from './components/UserHeader'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
@@ -53,7 +54,9 @@ async function deleteStory(storyId){
       <Header />
       <SignIn />
       <SignUp />
+      <br />
       <UserHeader />
+      <SignOut />
       <AddStory handleAddStory={addStory} />
         {storyCardElements}
     </AuthProvider>

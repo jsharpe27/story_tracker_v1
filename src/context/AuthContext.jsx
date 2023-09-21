@@ -10,14 +10,6 @@ export const AuthProvider = ({ children }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
-    const userSignOut = () => {
-        signOut(auth).then(() => {
-            console.log('User signed out!')
-        }).catch((error) => {
-            console.log(error)
-        })
-    }
-
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -30,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     },[])
 
     return (
-        <AuthContext.Provider value={{ authUser, setAuthUser, userSignOut, email, setEmail, password, setPassword }}>
+        <AuthContext.Provider value={{ authUser, setAuthUser, email, setEmail, password, setPassword }}>
             {children}
         </AuthContext.Provider>
     )
