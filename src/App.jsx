@@ -11,9 +11,9 @@ import AddStory from './components/AddStory'
 import Card from './components/Card'
 import { AuthProvider } from './context/AuthContext'
 
-
 function App() {
  const [storyData, setStoryData] = useState([])
+
 
 useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
@@ -58,7 +58,7 @@ async function deleteStory(storyId){
       <UserHeader />
       <SignOut />
       <AddStory handleAddStory={addStory} />
-        {storyCardElements}
+      {storyCardElements} 
     </AuthProvider>
     </>
   )

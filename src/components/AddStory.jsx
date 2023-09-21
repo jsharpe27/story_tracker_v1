@@ -15,6 +15,7 @@ const AddStory = ({handleAddStory}) => {
   }
 
   return (
+
     <div>
       <h3>Add a story</h3>
       <form onSubmit={handleSubmit}>
@@ -57,6 +58,7 @@ const AddStory = ({handleAddStory}) => {
       <button>Add Story</button>
       </form>
     </div>
+
   )
 }
 
