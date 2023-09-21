@@ -21,7 +21,7 @@ const SignUp = () => {
   return (
     <div className='sign-in-container'>
         <form onSubmit={signUp}>
-            <h1>Sign Up for Trakr!</h1>
+            <h3>Sign Up for StoryTrakr!</h3>
             <label htmlFor='email'>Email</label>
                 <input type='email' id={nanoid()}
                 placeholder='Enter your email' 

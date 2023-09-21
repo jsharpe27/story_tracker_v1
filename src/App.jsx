@@ -55,6 +55,8 @@ async function deleteStory(storyId){
       <SignIn />
       <SignUp />
       <br />
+      <br />
+      <br />
       <UserHeader />
       <SignOut />
       <AddStory handleAddStory={addStory} />
