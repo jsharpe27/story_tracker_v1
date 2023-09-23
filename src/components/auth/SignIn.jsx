@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext } from 'react'
 import { nanoid } from 'nanoid'
 import { AuthContext } from '../../context/AuthContext'
@@ -11,12 +10,14 @@ const SignIn = () => {
 
     const signIn = (e) => {
         e.preventDefault()
+        const form = e.target;
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
             console.log(userCredentials)
         }).catch((error) => {
             console.log(error)
         })
+        form.reset()
     }
 
   return (

@@ -31,16 +31,14 @@ function App() {
  //I reach out to Firebase and get the data from the stories collection and set them as
  //the value of the "storyData" state. When the value of "start" state changes, this effect
  //runs so that if a user changes, the "storyData" state is updated
-useEffect(() => {
+  useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
        const currentUser = snapshot._firestore._authCredentials.currentUser.uid
-
        const userStoriesArray = []
 
        snapshot.docs.forEach(doc => {
         const userStory = doc._document.data.value.mapValue.fields.userId.stringValue
           if (currentUser === userStory){
-            
               const userStoryObject = {
                 ...doc.data(),
                 id: doc.id
@@ -51,7 +49,7 @@ useEffect(() => {
        setStoryData(userStoriesArray)
     })
     return unsubscribe
-},[start])
+  },[start])
 
 
 // I add a story to the stories collection in Firebase
@@ -79,34 +77,26 @@ async function deleteStory(storyId){
           />
   })
 
-  
   return (
     <>
     <AuthProvider>
-      { !start &&
-        <>
-          <Header />
-          <SignIn />
-          <SignUp />
-        </>
+        { !start &&
+          <>
+            <Header />
+            <SignIn />
+            <SignUp />
+          </>
 
-      }
+        }
 
-      <br />
-      <br />
-      <br />
-
-      {
-        start &&
-        <>
-        <UserHeader />
-        <SignOut />
-        <AddStory handleAddStory={addStory} />
-        {storyCardElements} 
-      </>
-      }
-
-
+        { start &&
+          <>
+            <UserHeader />
+            <SignOut />
+            <AddStory handleAddStory={addStory} />
+            {storyCardElements} 
+          </>
+        }
     </AuthProvider>
     </>
   )
