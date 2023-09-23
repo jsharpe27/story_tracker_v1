@@ -1,4 +1,3 @@
-import React from 'react'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { useState } from 'react'
 import { auth } from '../../firebase'
@@ -13,6 +12,8 @@ const SignUp = () => {
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
             console.log(userCredentials)
+            setEmail('')
+            setPassword('')
         }).catch((error) => {
             console.log(error)
         })
