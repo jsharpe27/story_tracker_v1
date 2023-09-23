@@ -10,14 +10,14 @@ const SignIn = () => {
 
     const signIn = (e) => {
         e.preventDefault()
-        const form = e.target;
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials) => {
             console.log(userCredentials)
+            setEmail('');
+            setPassword('');
         }).catch((error) => {
             console.log(error)
         })
-        form.reset()
     }
 
   return (
