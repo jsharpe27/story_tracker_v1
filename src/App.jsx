@@ -15,7 +15,6 @@ import { auth } from './firebase'
 
 function App() {
  const [storyData, setStoryData] = useState([])
- const [currentUser, setCurrentUser] = useState(null)
  const [start, setStart] = useState(false)
 
  useEffect(() => {
@@ -29,35 +28,31 @@ function App() {
   return () => listen()
 },[])
 
-
-
- //I reach out to Firebase and get the data from the stories collection
+ //I reach out to Firebase and get the data from the stories collection and set them as
+ //the value of the "storyData" state. When the value of "start" state changes, this effect
+ //runs so that if a user changes, the "storyData" state is updated
 useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
        const currentUser = snapshot._firestore._authCredentials.currentUser.uid
-      
-       console.log(currentUser)
+
+       const userStoriesArray = []
 
        snapshot.docs.forEach(doc => {
-        const userStories = doc._document.data.value.mapValue.fields.userId.stringValue
-
-        if (currentUser === userStories){
-          console.log(userStories)
-        }
-    
+        const userStory = doc._document.data.value.mapValue.fields.userId.stringValue
+          if (currentUser === userStory){
+            
+              const userStoryObject = {
+                ...doc.data(),
+                id: doc.id
+                }
+            userStoriesArray.push(userStoryObject)
+          }
        })
-
-
-
-
-          const storiesArray = snapshot.docs.map(doc => ({
-              ...doc.data(),
-              id: doc.id
-          }))
-          setStoryData(storiesArray)
+       setStoryData(userStoriesArray)
     })
     return unsubscribe
-},[])
+},[start])
+
 
 // I add a story to the stories collection in Firebase
 async function addStory(storyObject){
