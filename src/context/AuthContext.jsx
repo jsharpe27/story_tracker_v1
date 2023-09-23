@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
+    //Listen for changes in authentication state
     useEffect(() => {
         const listen = onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -20,6 +21,7 @@ export const AuthProvider = ({ children }) => {
         })
         return () => listen()
     },[])
+
 
     return (
         <AuthContext.Provider value={{ authUser, setAuthUser, email, setEmail, password, setPassword }}>
