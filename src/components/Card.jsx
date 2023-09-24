@@ -39,7 +39,7 @@ const Card = () => {
                 <p>wordCount: {story.wordCount}</p>
                 <p></p>isSubmitted: {story.isSubmitted}
                 <p>description: {story.description}</p>
-                <button onClick={() => handleDelete(story.id)}>Delete Story</button>
+                <button onClick={() => deleteStory(story.id)}>Delete Story</button>
             </div> 
   })
 
