@@ -1,21 +1,23 @@
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import PropTypes from 'prop-types';
+import { addDoc, collection } from 'firebase/firestore'
+import { storiesCollection } from '../firebase'
 
-const AddStory = ({handleAddStory}) => {
-  AddStory.propTypes = {
-    handleAddStory: PropTypes.func.isRequired,
-  };
-  
+const AddStory = () => {
   const {authUser} = useContext(AuthContext)
 
+
+  async function addStory(storyObject){
+    await addDoc(storiesCollection, storyObject)
+  }
+  
   function handleSubmit(e){
     e.preventDefault()
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
     const storyObject = { ...formJson, userId: authUser.uid}
-    handleAddStory(storyObject)
+    addStory(storyObject)
     form.reset()
   }
 
