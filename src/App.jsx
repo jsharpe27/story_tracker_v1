@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { onSnapshot, addDoc, doc, deleteDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "./firebase"
-import './index.css'
 import Header from './components/Header'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
