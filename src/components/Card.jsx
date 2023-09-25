@@ -6,6 +6,11 @@ import { storiesCollection, db } from "../firebase"
 
 const Card = () => {
   const [storyData, setStoryData] = useState([])
+  const [editing, setEditing] = useState(false)
+  const [editTitle, setEditTitle] = useState('')
+  const [editWordCount, setEditWordCount] = useState('')
+  const [editIsSubmitted, setEditIsSubmitted] = useState('')
+  const [editDescription, setEditDescription] = useState('')
 
   useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
@@ -32,15 +37,26 @@ const Card = () => {
     await deleteDoc(docRef)
  }
 
+ function handleEditClick(){
+    setEditing((prevEditing => !prevEditing))
+ }
+
+ function handleSaveClick(){
+      alert('save button clicked')
+ }
+
   const storyCardElements = storyData.map(function(story){
-    return <div key={story.id}>
-                
-                <h4>title: {story.title}</h4>
-                <p>wordCount: {story.wordCount}</p>
-                <p></p>isSubmitted: {story.isSubmitted}
-                <p>description: {story.description}</p>
-                <button onClick={() => deleteStory(story.id)}>Delete Story</button>
-            </div> 
+    return (
+      <div key={story.id}>
+          { editing ? <input type='text' value={editTitle} placeholder='Update title' onChange={(e) => setEditTitle(e.target.value)} /> : <h4>title: {story.title}</h4> }
+          { editing ? <p>wordCount: {editWordCount}</p>  : <p>wordCount: {story.wordCount}</p> }
+          { editing ? <p>isSubmitted: {editIsSubmitted}</p> : <p>isSubmitted: {story.isSubmitted}</p> }
+          { editing ? <p>description: {editDescription}</p> : <p>description: {story.description}</p> }
+          <button onClick={() => setEditing((prevEditing => !prevEditing))}>{ !editing ? 'Edit' : 'Discard changes'}</button>
+          { editing ? <button onClick={handleSaveClick}>Save</button> : null}
+          <button onClick={() => deleteStory(story.id)}>Delete Story</button> 
+      </div> 
+    )
   })
 
   return (

@@ -1,11 +1,10 @@
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc } from 'firebase/firestore'
 import { storiesCollection } from '../firebase'
 
 const AddStory = () => {
   const {authUser} = useContext(AuthContext)
-
 
   async function addStory(storyObject){
     await addDoc(storiesCollection, storyObject)
