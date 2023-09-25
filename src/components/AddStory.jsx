@@ -21,15 +21,15 @@ const AddStory = () => {
   }
 
   return (
-    <div>
-      <h3>Add a story</h3>
+    <div className='bg-blue-950 text-white p-10'>
+      <h3>Enter details for story</h3>
       <form onSubmit={handleSubmit}>
         <label>
           Story Title: <input type="text" 
                               name="title" 
                               placeholder="enter title here"
                               required 
-                      />
+                       />
         </label>
         <label>
           Word Count: <input type="number" 
@@ -41,10 +41,10 @@ const AddStory = () => {
         <hr />
         <p>
           <label>Is Submitted?<input type="radio" 
-                        name="isSubmitted" 
-                        value={true}
-                        required
-                  />
+                                     name="isSubmitted" 
+                                     value={true}
+                                     required
+                              />
           Yes
           </label>
           <label><input type="radio" 
@@ -65,7 +65,7 @@ const AddStory = () => {
                       />
         </label>
         <hr />
-      <button>Add Story</button>
+      <button className='bg-green-200 text-black p-2 rounded-md mt-[1rem]'>Add Story</button>
       </form>
     </div>
   )

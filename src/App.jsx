@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import SignIn from './components/auth/SignIn'
 import SignUp from './components/auth/SignUp'
-import SignOut from './components/auth/SignOut'
 import UserHeader from './components/UserHeader'
 import AddStory from './components/AddStory'
 import Card from './components/Card'
@@ -34,16 +33,12 @@ function App() {
             <SignUp />
           </>
         }
-
         { start &&
-          <>
+          <main className='flex flex-col items-center bg-gray-600 h-screen'>
             <UserHeader />
-            <SignOut />
             <AddStory />
-            <section className='flex justify-center'>
-              <Card />
-            </section>
-          </>
+            <Card />
+          </main>
         }
     </AuthProvider>
     </>

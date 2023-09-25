@@ -37,10 +37,6 @@ const Card = () => {
     await deleteDoc(docRef)
  }
 
- function handleEditClick(){
-    setEditing((prevEditing => !prevEditing))
- }
-
  function handleSaveClick(){
       alert('save button clicked')
  }
@@ -49,9 +45,9 @@ const Card = () => {
     return (
       <div key={story.id}>
           { editing ? <input type='text' value={editTitle} placeholder='Update title' onChange={(e) => setEditTitle(e.target.value)} /> : <h4>title: {story.title}</h4> }
-          { editing ? <p>wordCount: {editWordCount}</p>  : <p>wordCount: {story.wordCount}</p> }
-          { editing ? <p>isSubmitted: {editIsSubmitted}</p> : <p>isSubmitted: {story.isSubmitted}</p> }
-          { editing ? <p>description: {editDescription}</p> : <p>description: {story.description}</p> }
+          { editing ? <input type='number' value={editWordCount} placeholder='Update word count' onChange={(e) => setEditWordCount(e.target.value)} />  : <p>wordCount: {story.wordCount}</p> }
+          { editing ? <input type='radio' value={editIsSubmitted} onChange={(e) => setEditIsSubmitted(e.target.value)} /> : <p>isSubmitted: {story.isSubmitted}</p> }
+          { editing ? <input type='text' value={editDescription} placeholder='Update description' onChange={(e) => setEditDescription} /> : <p>description: {story.description}</p> }
           <button onClick={() => setEditing((prevEditing => !prevEditing))}>{ !editing ? 'Edit' : 'Discard changes'}</button>
           { editing ? <button onClick={handleSaveClick}>Save</button> : null}
           <button onClick={() => deleteStory(story.id)}>Delete Story</button> 
