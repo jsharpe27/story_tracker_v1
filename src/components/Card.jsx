@@ -43,7 +43,7 @@ const Card = () => {
 
   const storyCardElements = storyData.map(function(story){
     return (
-      <div key={story.id}>
+      <div key={story.id} className='p-2 border border-black m-[.5rem]'>
           { editing ? <input type='text' value={editTitle} placeholder='Update title' onChange={(e) => setEditTitle(e.target.value)} /> : <h4>title: {story.title}</h4> }
           { editing ? <input type='number' value={editWordCount} placeholder='Update word count' onChange={(e) => setEditWordCount(e.target.value)} />  : <p>wordCount: {story.wordCount}</p> }
           { editing ? <input type='radio' value={editIsSubmitted} onChange={(e) => setEditIsSubmitted(e.target.value)} /> : <p>isSubmitted: {story.isSubmitted}</p> }
@@ -56,7 +56,7 @@ const Card = () => {
   })
 
   return (
-      <div className='bg-red-200 mt-[2rem] hover:cursor-pointer'> 
+      <div className='bg-yellow-100 mt-[2rem] hover:cursor-pointer p-4 flex'> 
         {storyCardElements}
       </div>
   )
