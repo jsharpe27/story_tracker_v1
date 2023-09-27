@@ -1,11 +1,10 @@
 import { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext'
-import { addDoc, collection } from 'firebase/firestore'
+import { addDoc } from 'firebase/firestore'
 import { storiesCollection } from '../firebase'
 
 const AddStory = () => {
   const {authUser} = useContext(AuthContext)
-
 
   async function addStory(storyObject){
     await addDoc(storiesCollection, storyObject)
@@ -16,21 +15,21 @@ const AddStory = () => {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    const storyObject = { ...formJson, userId: authUser.uid}
+    const storyObject = { ...formJson, userId: authUser.uid, editing: false}
     addStory(storyObject)
     form.reset()
   }
 
   return (
-    <div>
-      <h3>Add a story</h3>
+    <div className='bg-blue-950 text-white p-10'>
+      <h3>Enter details for story</h3>
       <form onSubmit={handleSubmit}>
         <label>
           Story Title: <input type="text" 
                               name="title" 
                               placeholder="enter title here"
                               required 
-                      />
+                       />
         </label>
         <label>
           Word Count: <input type="number" 
@@ -42,10 +41,10 @@ const AddStory = () => {
         <hr />
         <p>
           <label>Is Submitted?<input type="radio" 
-                        name="isSubmitted" 
-                        value={true}
-                        required
-                  />
+                                     name="isSubmitted" 
+                                     value={true}
+                                     required
+                              />
           Yes
           </label>
           <label><input type="radio" 
@@ -66,7 +65,7 @@ const AddStory = () => {
                       />
         </label>
         <hr />
-      <button>Add Story</button>
+      <button className='bg-green-200 text-black p-2 rounded-md mt-[1rem]'>Add Story</button>
       </form>
     </div>
   )

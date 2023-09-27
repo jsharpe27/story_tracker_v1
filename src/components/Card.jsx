@@ -1,11 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { onSnapshot, doc, deleteDoc } from 'firebase/firestore'
+import { useState, useEffect, useContext } from 'react'
+import { onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "../firebase"
 
 const Card = () => {
   const [storyData, setStoryData] = useState([])
+  const [editTitle, setEditTitle] = useState('')
+  const [editWordCount, setEditWordCount] = useState('')
+  const [editIsSubmitted, setEditIsSubmitted] = useState('')
+  const [editDescription, setEditDescription] = useState('')
 
   useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
@@ -32,19 +35,80 @@ const Card = () => {
     await deleteDoc(docRef)
  }
 
+ function handleEditClick(storyId){
+  setEditTitle('');
+  setEditWordCount('');
+  setEditIsSubmitted(false); 
+  setEditDescription('');
+    setStoryData(storyData.map(story => { 
+      if (story.id === storyId){
+        return {
+          ...story,
+          editing: !story.editing
+        }
+      }
+      return story
+    })) 
+}
+
+async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, editDescription){ 
+  const updatedStoryObject = {
+    id: id,
+    title: editTitle, 
+    wordCount: editWordCount,
+    isSubmitted: editIsSubmitted,
+    description: editDescription
+  }
+
+    if (updatedStoryObject.title && updatedStoryObject.wordCount && updatedStoryObject.isSubmitted && updatedStoryObject.description){
+
+    try {
+    const docRef = doc(db, "stories", id)
+    await setDoc(docRef, updatedStoryObject, { merge: true })
+    console.log('saved')
+  } catch (error){
+    console.log(error)
+  }
+  } else {
+  console.log('please fill out all fields')
+}
+}
+
   const storyCardElements = storyData.map(function(story){
-    return <div key={story.id}>
-                
-                <h4>title: {story.title}</h4>
-                <p>wordCount: {story.wordCount}</p>
-                <p></p>isSubmitted: {story.isSubmitted}
-                <p>description: {story.description}</p>
-                <button onClick={() => deleteStory(story.id)}>Delete Story</button>
-            </div> 
+    return (
+      <div key={story.id} className='p-2 border border-black m-[.5rem]'>
+          { story.editing ? <input type='text' 
+                                   value={editTitle} 
+                                   required 
+                                   placeholder='Update title'  
+                                   onChange={(e) => setEditTitle(e.target.value)}
+                          /> : <h4>title: {story.title}</h4> }
+          { story.editing ? <input type='number' 
+                                   value={editWordCount} 
+                                   required 
+                                   placeholder='Update word count'  
+                                   onChange={(e) => setEditWordCount(e.target.value)}
+                            />  : <p>wordCount: {story.wordCount}</p> }
+          { story.editing ? <input type='radio' 
+                                   value={editIsSubmitted} 
+                                   required 
+                                   onChange={(e) => setEditIsSubmitted(e.target.value)}
+                            /> : <p>isSubmitted: {story.isSubmitted}</p> }
+          { story.editing ? <input type='text' 
+                                   value={editDescription} 
+                                   required 
+                                   placeholder='Update description' 
+                                   onChange={(e) => setEditDescription(e.target.value)}
+                            /> : <p>description: {story.description}</p> }
+            { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}>Save</button> : null}
+          <button onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
+          <button onClick={() => deleteStory(story.id)}>Delete Story</button> 
+      </div>
+    )
   })
 
   return (
-      <div className='bg-red-200 mt-[2rem] hover:cursor-pointer'> 
+      <div className='bg-yellow-100 mt-[2rem] hover:cursor-pointer p-4 flex'> 
         {storyCardElements}
       </div>
   )
