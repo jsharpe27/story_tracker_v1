@@ -15,7 +15,7 @@ const AddStory = () => {
     const form = e.target;
     const formData = new FormData(form);
     const formJson = Object.fromEntries(formData.entries());
-    const storyObject = { ...formJson, userId: authUser.uid}
+    const storyObject = { ...formJson, userId: authUser.uid, editing: false}
     addStory(storyObject)
     form.reset()
   }

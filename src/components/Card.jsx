@@ -1,12 +1,10 @@
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { onSnapshot, doc, deleteDoc } from 'firebase/firestore'
+import { useState, useEffect, useContext } from 'react'
+import { onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "../firebase"
 
 const Card = () => {
   const [storyData, setStoryData] = useState([])
-  const [editing, setEditing] = useState(false)
   const [editTitle, setEditTitle] = useState('')
   const [editWordCount, setEditWordCount] = useState('')
   const [editIsSubmitted, setEditIsSubmitted] = useState('')
@@ -37,26 +35,72 @@ const Card = () => {
     await deleteDoc(docRef)
  }
 
- function handleSaveClick(){
-      alert('save button clicked')
- }
-
  function handleEditClick(storyId){
+  setEditTitle('');
+  setEditWordCount('');
+  setEditIsSubmitted(false); 
+  setEditDescription('');
+    setStoryData(storyData.map(story => { 
+      if (story.id === storyId){
+        return {
+          ...story,
+          editing: !story.editing
+        }
+      }
+      return story
+    })) 
+}
 
-    setEditing((prevEditing => !prevEditing))
- }
+async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, editDescription){ 
+  const updatedStoryObject = {
+    id: id,
+    title: editTitle, 
+    wordCount: editWordCount,
+    isSubmitted: editIsSubmitted,
+    description: editDescription
+  }
+
+  console.log(updatedStoryObject)
+  
+    try {
+    const docRef = doc(db, "stories", id)
+    await setDoc(docRef, updatedStoryObject, { merge: true })
+    console.log('saved')
+  } catch (error){
+    console.log(error)
+  }
+}
 
   const storyCardElements = storyData.map(function(story){
     return (
       <div key={story.id} className='p-2 border border-black m-[.5rem]'>
-          { editing ? <input type='text' value={editTitle} placeholder='Update title' onChange={(e) => setEditTitle(e.target.value)} /> : <h4>title: {story.title}</h4> }
-          { editing ? <input type='number' value={editWordCount} placeholder='Update word count' onChange={(e) => setEditWordCount(e.target.value)} />  : <p>wordCount: {story.wordCount}</p> }
-          { editing ? <input type='radio' value={editIsSubmitted} onChange={(e) => setEditIsSubmitted(e.target.value)} /> : <p>isSubmitted: {story.isSubmitted}</p> }
-          { editing ? <input type='text' value={editDescription} placeholder='Update description' onChange={(e) => setEditDescription} /> : <p>description: {story.description}</p> }
-          <button onClick={() => handleEditClick(story.id)}>{ !editing ? 'Edit' : 'Discard changes'}</button>
-          { editing ? <button onClick={handleSaveClick}>Save</button> : null}
+          { story.editing ? <input type='text' 
+                                   value={editTitle} 
+                                   required 
+                                   placeholder='Update title'  
+                                   onChange={(e) => setEditTitle(e.target.value)}
+                          /> : <h4>title: {story.title}</h4> }
+          { story.editing ? <input type='number' 
+                                   value={editWordCount} 
+                                   required 
+                                   placeholder='Update word count'  
+                                   onChange={(e) => setEditWordCount(e.target.value)}
+                            />  : <p>wordCount: {story.wordCount}</p> }
+          { story.editing ? <input type='radio' 
+                                   value={editIsSubmitted} 
+                                   required 
+                                   onChange={(e) => setEditIsSubmitted(e.target.value)}
+                            /> : <p>isSubmitted: {story.isSubmitted}</p> }
+          { story.editing ? <input type='text' 
+                                   value={editDescription} 
+                                   required 
+                                   placeholder='Update description' 
+                                   onChange={(e) => setEditDescription(e.target.value)}
+                            /> : <p>description: {story.description}</p> }
+            { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}>Save</button> : null}
+          <button onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
           <button onClick={() => deleteStory(story.id)}>Delete Story</button> 
-      </div> 
+      </div>
     )
   })
 
