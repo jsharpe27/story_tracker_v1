@@ -60,8 +60,8 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     description: editDescription
   }
 
-  console.log(updatedStoryObject)
-  
+    if (updatedStoryObject.title && updatedStoryObject.wordCount && updatedStoryObject.isSubmitted && updatedStoryObject.description){
+
     try {
     const docRef = doc(db, "stories", id)
     await setDoc(docRef, updatedStoryObject, { merge: true })
@@ -69,6 +69,9 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
   } catch (error){
     console.log(error)
   }
+  } else {
+  console.log('please fill out all fields')
+}
 }
 
   const storyCardElements = storyData.map(function(story){
