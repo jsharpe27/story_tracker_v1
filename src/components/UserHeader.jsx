@@ -8,7 +8,7 @@ export default function UserHeader() {
 
   return (
     <div>
-      <div className='bg-blue-950 text-white p-10'>
+      <div className=' flex items-center justify-center p-5 bg-blue-950 text-white'>
           { authUser ? <h1>Welcome, {authUser.email}</h1> : "" }
       </div>
       <SignOut />

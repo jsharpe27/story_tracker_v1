@@ -60,7 +60,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     description: editDescription
   }
 
-    if (updatedStoryObject.title && updatedStoryObject.wordCount && updatedStoryObject.isSubmitted && updatedStoryObject.description){
+    if (Object.values(updatedStoryObject).every(Boolean)) {
 
     try {
     const docRef = doc(db, "stories", id)

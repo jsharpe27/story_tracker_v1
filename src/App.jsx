@@ -34,7 +34,7 @@ function App() {
           </>
         }
         { start &&
-          <main className='flex flex-col items-center bg-gray-600 h-screen'>
+          <main>
             <UserHeader />
             <AddStory />
             <Card />

@@ -14,8 +14,6 @@ export default function SignOut() {
     }
 
   return (
-    <div className='bg-blue-950 text-white'>
         <button className='bg-red-200 text-black p-2 rounded-md' onClick={userSignOut}>Sign Out!</button>
-    </div>
   )
 }
