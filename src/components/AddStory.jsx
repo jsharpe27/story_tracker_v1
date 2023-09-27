@@ -21,26 +21,24 @@ const AddStory = () => {
   }
 
   return (
-    <div className='bg-blue-950 text-white p-10'>
-      <h3>Enter details for story</h3>
+    <div className='bg-blue-950 text-white p-10 flex flex-col items-center'>
+      <h3 className='text-xl only:font-medium mb-[2rem]'>Add a story below</h3>
       <form onSubmit={handleSubmit}>
-        <label>
-          Story Title: <input type="text" 
+        <div className='flex flex-col p-5 bg-gray-700'>
+          <input className='text-black'
+                              type="text" 
                               name="title" 
-                              placeholder="enter title here"
+                              placeholder="title"
                               required 
                        />
-        </label>
-        <label>
-          Word Count: <input type="number" 
+          <input className='text-black'
+                             type="number" 
                              name="wordCount" 
-                             placeholder="enter word count"
+                             placeholder="word count"
                              required
                       />
-        </label>
-        <hr />
-        <p>
-          <label>Is Submitted?<input type="radio" 
+          <label>Is Submitted?<input className='text-black'
+                                     type="radio" 
                                      name="isSubmitted" 
                                      value={true}
                                      required
@@ -54,18 +52,15 @@ const AddStory = () => {
                 />
           No
           </label>
-        </p>
-        <hr />
-        <label>
-          Description: <textarea name="description" 
-                                 placeholder="enter description"
+          <textarea className='text-black'
+                                name="description" 
+                                 placeholder="synopsis"
                                  rows={4}
                                  cols={40}
                                  required 
-                      />
-        </label>
-        <hr />
-      <button className='bg-green-200 text-black p-2 rounded-md mt-[1rem]'>Add Story</button>
+            />
+        </div>
+        <button className='bg-green-200 text-black p-2 rounded-md mt-[1rem]'>Add Story</button>
       </form>
     </div>
   )

@@ -14,6 +14,9 @@ export default function SignOut() {
     }
 
   return (
-        <button className='bg-red-200 text-black p-2 rounded-md' onClick={userSignOut}>Sign Out!</button>
+        <button className='bg-red-200 text-black 
+                font-semibold p-2 rounded-md
+                hover:bg-gray-200 
+                ' onClick={userSignOut}>Sign Out!</button>
   )
 }
