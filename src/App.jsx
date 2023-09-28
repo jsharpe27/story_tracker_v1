@@ -29,13 +29,13 @@ function App() {
         { !start &&
           <>
             <Header />
-            <div>
-              <img src='../src/assets/typewriter.jpg' alt='typewriter' className='bg-cover h-96 relative' />
-              <div className='absolute top-12 left-1'>
-                <SignIn />
-                <SignUp />
-              </div>
+            <div className="relative bg-typewriter">
+                <div className='absolute top-12 left-1'>
+                  <SignIn />
+                  <SignUp />
+                </div>
             </div>
+
             
           </>
         }

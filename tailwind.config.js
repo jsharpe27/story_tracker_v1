@@ -6,7 +6,11 @@ export default {
     './src/components/auth/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'typewriter': 'url("/src/assets/typewriter.jpg")',
+      }
+    },
   },
   plugins: [],
 }
