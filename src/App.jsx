@@ -29,8 +29,14 @@ function App() {
         { !start &&
           <>
             <Header />
-            <SignIn />
-            <SignUp />
+            <div>
+              <img src='../src/assets/typewriter.jpg' alt='typewriter' className='bg-cover h-96 relative' />
+              <div className='absolute top-12 left-1'>
+                <SignIn />
+                <SignUp />
+              </div>
+            </div>
+            
           </>
         }
         { start &&
