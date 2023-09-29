@@ -23,7 +23,7 @@ const SignIn = () => {
   return (
     <div className=''>
         <form onSubmit={signIn}>
-            <h3>Sign In to StoryTrakr!</h3>
+            <h3>Sign in </h3>
             <label htmlFor='email'>Email</label>
                 <input type='email' id={nanoid()}
                 placeholder='Enter your email' 

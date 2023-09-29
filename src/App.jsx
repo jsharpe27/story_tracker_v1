@@ -27,18 +27,16 @@ function App() {
     <>
     <AuthProvider>
         { !start &&
-          <>
+            <>
             <Header />
-            <div className="relative bg-typewriter">
-                <div className='absolute top-12 left-1'>
-                  <SignIn />
-                  <SignUp />
-                </div>
-            </div>
-
-            
-          </>
+                  <img className='w-fit absolute  ' src='./src/assets/typewriter.jpg' alt='type-writer' />
+                  <div className='relative top-12 left-1 text-white clip'>
+                    <SignIn />
+                    <SignUp />
+                  </div>
+            </>
         }
+
         { start &&
           <main>
             <UserHeader />

@@ -76,7 +76,8 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 
   const storyCardElements = storyData.map(function(story){
     return (
-      <div key={story.id} className='p-2 border border-black m-[.5rem]'>
+      <div key={story.id} className='p-2 flex flex-col border border-black m-[.5rem]
+      bg-gray-500 text-white '>
           { story.editing ? <input type='text' 
                                    value={editTitle} 
                                    required 
