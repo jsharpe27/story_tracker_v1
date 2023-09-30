@@ -78,28 +78,43 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     return (
       <div key={story.id} className='p-2 flex flex-col border border-black m-[.5rem]
       bg-gray-500 text-white '>
-          { story.editing ? <input type='text' 
+          { story.editing ? <input type='text'
+                                   className='text-black'       
                                    value={editTitle} 
                                    required 
                                    placeholder='Update title'  
                                    onChange={(e) => setEditTitle(e.target.value)}
                           /> : <h4>title: {story.title}</h4> }
-          { story.editing ? <input type='number' 
+          { story.editing ? <input type='number'
+                                  className='text-black' 
                                    value={editWordCount} 
                                    required 
                                    placeholder='Update word count'  
                                    onChange={(e) => setEditWordCount(e.target.value)}
                             />  : <p>wordCount: {story.wordCount}</p> }
-          { story.editing ? <input type='radio' 
-                                   value={editIsSubmitted} 
-                                   required 
+          { story.editing ? <><label>Yes, it's submitted:<input type='radio' 
+                                   value={true} 
+                                   required
+                                   name='isSubmitted'
                                    onChange={(e) => setEditIsSubmitted(e.target.value)}
-                            /> : <p>isSubmitted: {story.isSubmitted}</p> }
-          { story.editing ? <input type='text' 
-                                   value={editDescription} 
-                                   required 
-                                   placeholder='Update description' 
-                                   onChange={(e) => setEditDescription(e.target.value)}
+                            /></label> 
+                            <label>No, it's not submitted: <input type='radio' 
+                                   value={false} 
+                                   required
+                                   name='isSubmitted'
+                                   onChange={(e) => setEditIsSubmitted(e.target.value)}
+                            /></label>
+                            </>
+                            
+                            : <p>isSubmitted: {story.isSubmitted}</p> }
+          { story.editing ? <textarea type='text'
+                                  className='text-black'
+                                  rows={4}
+                                  cols={40}
+                                  value={editDescription} 
+                                  required 
+                                  placeholder='Update description' 
+                                  onChange={(e) => setEditDescription(e.target.value)}
                             /> : <p>description: {story.description}</p> }
             { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}>Save</button> : null}
           <button onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
