@@ -21,24 +21,31 @@ const SignIn = () => {
     }
 
   return (
-    <div className=''>
-        <form onSubmit={signIn}>
-            <h3>Sign in </h3>
-            <label htmlFor='email'>Email</label>
-                <input type='email' id={nanoid()}
-                placeholder='Enter your email' 
+    <div className=' text-white p-8'>
+        <form className='flex flex-col items-center' onSubmit={signIn}>
+            <label htmlFor='email'></label>
+                <input className='text-black m-2 p-2'
+                type='email' id={nanoid()}
+                placeholder='Enter your email'
+                required 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
 
-            <label htmlFor='password'>Password</label>
-                <input type='password' id={nanoid()} 
-                placeholder='Enter your password' 
+            <label htmlFor='password'></label>
+                <input className='text-black m-2 p-2'
+                type='password' id={nanoid()} 
+                placeholder='Enter your password'
+                required
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
                 />
-
-            <button type='submit'>Sign In</button>
+            <button className='group flex items-center justify-center 
+                    h-[3rem] w-[8rem] bg-black 
+                    text-white gap-2 outline-none transition-all 
+                    focus:scale-110 hover:scale-110 hover:bg-gray-950 
+                    active:scale-105 
+                    disabled:scale-100 disabled:bg-opacity-65' type='submit'>Sign In</button>
         </form>
     </div>
   )

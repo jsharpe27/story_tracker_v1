@@ -20,23 +20,23 @@ const SignUp = () => {
     }
 
   return (
-    <div className='sign-in-container'>
-        <form onSubmit={signUp}>
-            <h3>Sign Up for StoryTrakr!</h3>
+    <div className=' text-white text-md'>
+        <form className='flex flex-col mt-5' onSubmit={signUp}>
+            <h3>Don't have an account? Sign Up here.</h3>
             <label htmlFor='email'>Email</label>
-                <input type='email' id={nanoid()}
+                <input className='text-black'
+                type='email' id={nanoid()}
                 placeholder='Enter your email' 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
-
             <label htmlFor='password'>Password</label>
-                <input type='password' id={nanoid()}
+                <input className='text-black'
+                type='password' id={nanoid()}
                 placeholder='Enter your password' 
                 value={password} 
                 onChange={(e) => setPassword(e.target.value)}
                 />
-
             <button type='submit'>Sign Up</button>
         </form>
     </div>

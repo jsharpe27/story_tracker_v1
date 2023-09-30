@@ -8,6 +8,8 @@ import Card from './components/Card'
 import { AuthProvider } from './context/AuthContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
+import { motion } from 'framer-motion'
+import Info from './components/Info'
 
 function App() {
  const [start, setStart] = useState(false)
@@ -28,13 +30,43 @@ function App() {
     <AuthProvider>
         { !start &&
             <>
-            <Header />
-                  <img className='w-fit absolute  ' src='./src/assets/typewriter.jpg' alt='type-writer' />
-                  <div className='relative top-12 left-1 text-white clip'>
-                    <SignIn />
-                    <SignUp />
-                  </div>
-            </>
+            <div className='relative min-h-screen'>
+              <div
+                className='absolute inset-0'
+                style={{
+                  backgroundImage: "url('./src/assets/typewriter.jpg')",
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <div className='mb-20 '
+                >
+                  <Header />
+                </div>
+                <motion.div className='flex flex-col justify-center'
+                 initial={{ opacity: 0, scale:0 }}
+                 animate={{ opacity: 1, scale:1 }}
+                 transition={{
+                     type: "tween",
+                     duration: 0.4,
+                 }}
+                >
+                    <div className='flex flex-col items-center text-center'>
+                      <SignIn />
+                    </div>
+                </motion.div>
+                <motion.div className='flex justify-center '>
+                  <SignUp />
+                </motion.div>
+
+                 <Info />
+                
+              </div>
+              
+            </div>
+           
+          </>
         }
 
         { start &&
