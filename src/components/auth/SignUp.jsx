@@ -22,16 +22,17 @@ const SignUp = () => {
   return (
     <div className=' text-white text-md'>
         <form className='flex flex-col mt-5' onSubmit={signUp}>
-            <h3>Don't have an account? Sign Up here.</h3>
+            <h3 className='text-md'>Don't have an account? 
+            {' '}<span className='underline font-medium text-2xl'>Sign Up.</span></h3>
             <label htmlFor='email'>Email</label>
-                <input className='text-black'
+                <input className='text-black  p-1'
                 type='email' id={nanoid()}
                 placeholder='Enter your email' 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 />
             <label htmlFor='password'>Password</label>
-                <input className='text-black'
+                <input className='text-black p-1'
                 type='password' id={nanoid()}
                 placeholder='Enter your password' 
                 value={password} 

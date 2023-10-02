@@ -43,17 +43,22 @@ function App() {
                 >
                   <Header />
                 </div>
-                <div className='flex flex-col justify-center'>
+                <div className='flex flex-col justify-center mt-[-3rem]'>
                     <div className='flex flex-col items-center text-center'>
                       <SignIn />
                     </div>
                 </div>
-                <div className='flex justify-center '>
+                <div className='flex flex-col md:flex justify-center items-center gap-10 align'
+                style={{
+                  backgroundImage: "url('./src/assets/typewriter.jpg')",
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }}
+                >
+                  <Info />
                   <SignUp />
                 </div>
-
-                 <Info />
-                
               </div>
               
             </div>
