@@ -22,10 +22,10 @@ const AddStory = () => {
   }
 
   return (
-    <div className='bg-black text-white p-5 flex flex-col w-4/12'>
-      <h3 className='text-2xl only:font-medium mb-[1rem]'>Add a story</h3>
+    <div className='bg-black text-white  rounded px-10 flex flex-col  justify-center items-center'>
+      <h3 className='text-2xl only:font-medium my-[1rem]'>Add a story</h3>
       <form onSubmit={handleSubmit}>
-        <div className='flex flex-col p-5 '>
+        <div className='flex flex-col p-5 items-center '>
           <input className='text-black m-2'
                               type="text" 
                               name="title" 
@@ -38,21 +38,23 @@ const AddStory = () => {
                              placeholder="word count"
                              required
                       />
-          <label className='text-white'>Is Submitted?<input className='text-black'
-                                     type="radio" 
-                                     name="isSubmitted" 
-                                     value={true}
-                                     required
-                              />
-          Yes
-          </label>
-          <label className='text-white'><input type="radio" 
-                        name="isSubmitted" 
-                        value={false}
-                        required 
-                />
-          No
-          </label>
+          <div className='flex items-center border border-white px-5'>
+            <label className='text-white'>Is Submitted?{' '}<input className='text-black'
+                                      type="radio" 
+                                      name="isSubmitted" 
+                                      value={true}
+                                      required
+                                />
+            {' '}Yes{' '}
+            </label>
+            <label className='text-white'><input type="radio" 
+                          name="isSubmitted" 
+                          value={false}
+                          required 
+                  />
+            {' '}No{' '}
+            </label>
+          </div>
           <textarea className='text-black'
                                 name="description" 
                                  placeholder="synopsis"

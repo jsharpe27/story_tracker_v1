@@ -82,29 +82,30 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 
   const storyCardElements = storyData.map(function(story){
     return (
-      <div key={story.id} className='p-3 flex flex-col border border-black m-[.5rem]
-      bg-gray-500 text-white flex-wrap w-1/6 '>
+      <>
+      { story.editing ? <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+      bg-gray-700 text-white flex-wrap w-1/3 items-center'>
           { story.editing ? <input type='text'
-                                   className='text-black'       
+                                   className='text-black border border-black'       
                                    value={editTitle} 
                                    required 
                                    placeholder='Update title'  
                                    onChange={(e) => setEditTitle(e.target.value)}
-                          /> : <h4>title: {story.title}</h4> }
+                          /> : <h4>Title: {story.title}</h4> }
           { story.editing ? <input type='number'
-                                  className='text-black' 
+                                  className='text-black border border-black' 
                                    value={editWordCount} 
                                    required 
                                    placeholder='Update word count'  
                                    onChange={(e) => setEditWordCount(e.target.value)}
-                            />  : <p>wordCount: {story.wordCount}</p> }
-          { story.editing ? <><label>Yes, it's submitted:<input type='radio' 
+                            />  : <p>Word count: {story.wordCount}</p> }
+          { story.editing ? <><label>Yes, it's submitted: {' '}<input type='radio' 
                                    value={true} 
                                    required
                                    name='isSubmitted'
                                    onChange={(e) => setEditIsSubmitted(e.target.value)}
                             /></label> 
-                            <label>No, it's not submitted: <input type='radio' 
+                            <label>No, it's not submitted:  {' '} <input type='radio' 
                                    value={false} 
                                    required
                                    name='isSubmitted'
@@ -112,32 +113,109 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
                             /></label>
                             </>
                             
-                            : <p>isSubmitted: {story.isSubmitted}</p> }
+                            : <p>Submitted?: {story.isSubmitted}</p> }
           { story.editing ? <textarea type='text'
-                                  className='text-black'
+                                  className='text-black border border-black'
                                   rows={4}
                                   cols={40}
                                   value={editDescription} 
                                   required 
                                   placeholder='Update description' 
                                   onChange={(e) => setEditDescription(e.target.value)}
-                            /> : <p>description: {story.description}</p> }
-            { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}>Save</button> : null}
-          <button className='
-          h-[2rem] w-[7rem] bg-white 
-          text-black outline-none transition-all 
-          focus:scale-110 hover:bg-black hover:text-white
-          active:scale-105 
-          disabled:scale-100 disabled:bg-opacity-65
-          ' onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
-          <button className='
-          h-[2rem] w-[7rem] bg-red-200 
-          text-black outline-none transition-all 
-          focus:scale-110 hover:bg-black hover:text-red-500
-          active:scale-105 
-          disabled:scale-100 disabled:bg-opacity-65'
-          onClick={() => deleteStory(story.id)}>Delete Story</button> 
-      </div>
+                            /> : <p>Description: {story.description}</p> }
+            { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}
+                                className='bg-black text-white py-2 px-5 mt-5 flex w-[7rem] justify-center
+                                outline-none transition-all 
+                                hover:bg-gray-400 hover:text-black hover:font-medium
+                                disabled:scale-100 disabled:bg-opacity-65
+                                '
+                              >
+                                Save</button> : null}
+          <div className='flex justify-between mt-auto p-3 gap-10'>
+            <button className='bottom-0 left-0 flex justify-center items-center
+             w-[7rem] bg-black py-2
+            text-white outline-none transition-all 
+            hover:bg-gray-400 hover:text-black hover:font-medium
+            active:scale-105 
+            disabled:scale-100 disabled:bg-opacity-65
+            ' onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
+            <button className='  bottom-0 right-0 
+            flex justify-center items-center
+             w-[7rem] bg-red-200 
+            text-black outline-none transition-all 
+            hover:bg-black hover:text-red-500
+            active:scale-105 
+            disabled:scale-100 disabled:bg-opacity-65'
+            onClick={() => deleteStory(story.id)}>Delete Story</button> 
+          </div>
+      </div> :
+                <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+                bg-white text-black flex-wrap w-1/3 items-center'>
+                    { story.editing ? <input type='text'
+                                             className='text-black border border-black'       
+                                             value={editTitle} 
+                                             required 
+                                             placeholder='Update title'  
+                                             onChange={(e) => setEditTitle(e.target.value)}
+                                    /> : <h4>Title: {story.title}</h4> }
+                    { story.editing ? <input type='number'
+                                            className='text-black border border-black' 
+                                             value={editWordCount} 
+                                             required 
+                                             placeholder='Update word count'  
+                                             onChange={(e) => setEditWordCount(e.target.value)}
+                                      />  : <p>Word count: {story.wordCount}</p> }
+                    { story.editing ? <><label>Yes, it's submitted: {' '}<input type='radio' 
+                                             value={true} 
+                                             required
+                                             name='isSubmitted'
+                                             onChange={(e) => setEditIsSubmitted(e.target.value)}
+                                      /></label> 
+                                      <label>No, it's not submitted:  {' '} <input type='radio' 
+                                             value={false} 
+                                             required
+                                             name='isSubmitted'
+                                             onChange={(e) => setEditIsSubmitted(e.target.value)}
+                                      /></label>
+                                      </>
+                                      
+                                      : <p>Submitted?: {story.isSubmitted}</p> }
+                    { story.editing ? <textarea type='text'
+                                            className='text-black border border-black'
+                                            rows={4}
+                                            cols={40}
+                                            value={editDescription} 
+                                            required 
+                                            placeholder='Update description' 
+                                            onChange={(e) => setEditDescription(e.target.value)}
+                                      /> : <p>Description: {story.description}</p> }
+                      { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}
+                                          className='bg-black text-white py-2 px-5 mt-5 flex w-[7rem] justify-center
+                                          outline-none transition-all 
+                                          hover:bg-gray-400 hover:text-black hover:font-medium
+                                          disabled:scale-100 disabled:bg-opacity-65
+                                          '
+                                        >
+                                          Save</button> : null}
+                    <div className='flex justify-between mt-auto p-3 gap-10'>
+                      <button className='bottom-0 left-0 flex justify-center items-center
+                       w-[7rem] bg-black py-2
+                      text-white outline-none transition-all 
+                      hover:bg-gray-400 hover:text-black hover:font-medium
+                      active:scale-105 
+                      disabled:scale-100 disabled:bg-opacity-65
+                      ' onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
+                      <button className='  bottom-0 right-0 
+                      flex justify-center items-center
+                       w-[7rem] bg-red-200 
+                      text-black outline-none transition-all 
+                      hover:bg-black hover:text-red-500
+                      active:scale-105 
+                      disabled:scale-100 disabled:bg-opacity-65'
+                      onClick={() => deleteStory(story.id)}>Delete Story</button> 
+                    </div>
+                </div>}
+      </>
     )
   })
 
