@@ -221,7 +221,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 
   return (
     <>
-      { storiesExist ? <div><h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> <div className='p-4 flex'>{storyCardElements}</div>
+      { storiesExist ? <div><h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> <div className='p-3 flex'>{storyCardElements}</div>
       </div> : <p className='text-white text-3xl font-serif mt-[1rem] mb-[1rem]'>You have no stories tracked (yet).</p>}
     </>
   )
