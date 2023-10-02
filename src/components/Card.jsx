@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "../firebase"
+import { motion } from 'framer-motion'
 
 const Card = () => {
   const [storyData, setStoryData] = useState([])
@@ -84,7 +85,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     return (
       <>
       { story.editing ? <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
-      bg-gray-700 text-white flex-wrap w-1/3 items-center'>
+      bg-gray-700 text-white flex-wrap  items-center'>
           { story.editing ? <input type='text'
                                    className='text-black border border-black'       
                                    value={editTitle} 
@@ -150,7 +151,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
           </div>
       </div> :
                 <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
-                bg-white text-black flex-wrap w-1/3 items-center'>
+                bg-white text-black flex-wrap  items-center'>
                     { story.editing ? <input type='text'
                                              className='text-black border border-black'       
                                              value={editTitle} 
@@ -221,8 +222,22 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 
   return (
     <>
-      { storiesExist ? <div><h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> <div className='p-3 flex'>{storyCardElements}</div>
-      </div> : <p className='text-white text-3xl font-serif mt-[1rem] mb-[1rem]'>You have no stories tracked (yet).</p>}
+      { storiesExist ? 
+      <div>
+        <h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> 
+        <motion.div className='p-3 flex'
+          initial={{ opacity: 0, scale:0 }}
+          animate={{ opacity: 1, scale:1 }}
+          transition={{
+            type: "tween",
+            duration: 0.5,
+        }}
+        >
+          {storyCardElements}
+        </motion.div>
+      </div> 
+
+      : <p className='text-white text-3xl font-serif mt-[12rem] mb-[1rem]'>You have no stories tracked (yet).</p>}
     </>
   )
 }

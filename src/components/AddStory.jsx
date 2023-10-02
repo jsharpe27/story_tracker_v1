@@ -23,7 +23,7 @@ const AddStory = () => {
 
   return (
     <div className='bg-black text-white  rounded px-10 flex flex-col  justify-center items-center'>
-      <h3 className='text-2xl only:font-medium my-[1rem]'>Add a story</h3>
+      <h3 className='text-2xl only:font-medium mt-2 mb-[-1rem]'>Add a story</h3>
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col p-5 items-center '>
           <input className='text-black m-2'
@@ -38,7 +38,7 @@ const AddStory = () => {
                              placeholder="word count"
                              required
                       />
-          <div className='flex items-center border border-white px-5'>
+          <div className='flex items-center px-5 mb-2'>
             <label className='text-white'>Is Submitted?{' '}<input className='text-black'
                                       type="radio" 
                                       name="isSubmitted" 
@@ -62,15 +62,16 @@ const AddStory = () => {
                                  cols={40}
                                  required 
             />
-        </div>
         <button className='h-[2rem] w-[7rem] bg-gray-800
         text-white font-medium gap-2 outline-none transition-all 
-        focus:scale-110 hover:scale-110 hover:bg-
-        active:scale-105 
-        disabled:scale-100 disabled:bg-opacity-65
+        focus:scale-110 hover:scale-110 hover:bg-green-300 hover:text-black
+        active:scale-105 disabled:scale-100 disabled:bg-opacity-65
         mt-5
         '
         >Add Story</button>
+
+        </div>
+        
       </form>
     </div>
   )

@@ -39,15 +39,16 @@ function App() {
                   backgroundPosition: 'center',
                 }}
               >
-                <div className='mb-20 '
-                >
+                <div className='mb-20 '>
                   <Header />
                 </div>
+
                 <div className='flex flex-col justify-center mt-[-3rem]'>
                     <div className='flex flex-col items-center text-center'>
                       <SignIn />
                     </div>
                 </div>
+                
                 <div className='flex flex-col md:flex justify-center items-center gap-10 align'>
                   <Info />
                   <SignUp />
