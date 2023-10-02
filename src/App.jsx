@@ -67,11 +67,17 @@ function App() {
         }
 
         { start &&
-          <main>
+          <main className='absolute inset-0'
+          style={{
+            backgroundImage: "url('./src/assets/editing.jpg')",
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+          }}
+          >
             <UserHeader />
             <Card />
             <AddStory />
-            
           </main>
         }
     </AuthProvider>
