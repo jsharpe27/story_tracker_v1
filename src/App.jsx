@@ -48,14 +48,7 @@ function App() {
                       <SignIn />
                     </div>
                 </div>
-                <div className='flex flex-col md:flex justify-center items-center gap-10 align'
-                style={{
-                  backgroundImage: "url('./src/assets/typewriter.jpg')",
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  backgroundPosition: 'center',
-                }}
-                >
+                <div className='flex flex-col md:flex justify-center items-center gap-10 align'>
                   <Info />
                   <SignUp />
                 </div>
