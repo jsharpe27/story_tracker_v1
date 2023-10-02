@@ -8,7 +8,6 @@ import Card from './components/Card'
 import { AuthProvider } from './context/AuthContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
-import { motion } from 'framer-motion'
 import Info from './components/Info'
 
 function App() {
@@ -44,21 +43,14 @@ function App() {
                 >
                   <Header />
                 </div>
-                <motion.div className='flex flex-col justify-center'
-                 initial={{ opacity: 0, scale:0 }}
-                 animate={{ opacity: 1, scale:1 }}
-                 transition={{
-                     type: "tween",
-                     duration: 0.4,
-                 }}
-                >
+                <div className='flex flex-col justify-center'>
                     <div className='flex flex-col items-center text-center'>
                       <SignIn />
                     </div>
-                </motion.div>
-                <motion.div className='flex justify-center '>
+                </div>
+                <div className='flex justify-center '>
                   <SignUp />
-                </motion.div>
+                </div>
 
                  <Info />
                 
