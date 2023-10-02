@@ -82,8 +82,8 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 
   const storyCardElements = storyData.map(function(story){
     return (
-      <div key={story.id} className='p-2 flex flex-col border border-black m-[.5rem]
-      bg-gray-500 text-white '>
+      <div key={story.id} className='p-3 flex flex-col border border-black m-[.5rem]
+      bg-gray-500 text-white flex-wrap w-1/4 '>
           { story.editing ? <input type='text'
                                    className='text-black'       
                                    value={editTitle} 
@@ -123,15 +123,27 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
                                   onChange={(e) => setEditDescription(e.target.value)}
                             /> : <p>description: {story.description}</p> }
             { story.editing ? <button onClick={() => handleSaveClick(story.id, editTitle, editWordCount, editIsSubmitted, editDescription)}>Save</button> : null}
-          <button onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
-          <button onClick={() => deleteStory(story.id)}>Delete Story</button> 
+          <button className='
+          h-[2rem] w-[7rem] bg-white 
+          text-black outline-none transition-all 
+          focus:scale-110 hover:bg-black hover:text-white
+          active:scale-105 
+          disabled:scale-100 disabled:bg-opacity-65
+          ' onClick={() => handleEditClick(story.id)}>{ !story.editing ? 'Edit' : 'Discard changes'}</button>
+          <button className='
+          h-[2rem] w-[7rem] bg-red-200 
+          text-black outline-none transition-all 
+          focus:scale-110 hover:bg-black hover:text-red-500
+          active:scale-105 
+          disabled:scale-100 disabled:bg-opacity-65'
+          onClick={() => deleteStory(story.id)}>Delete Story</button> 
       </div>
     )
   })
 
   return (
     <>
-      { storiesExist ? <div><h2>Your stories:</h2> <div className='mt-[2rem] hover:cursor-pointer p-4 flex'>{storyCardElements}</div>
+      { storiesExist ? <div><h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> <div className='p-4 flex'>{storyCardElements}</div>
       </div> : <p>You have no stories tracked (yet).</p>}
     </>
   )

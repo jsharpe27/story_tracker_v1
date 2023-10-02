@@ -63,7 +63,7 @@ const AddStory = () => {
         </div>
         <button className='h-[2rem] w-[7rem] bg-gray-800
         text-white font-medium gap-2 outline-none transition-all 
-        focus:scale-110 hover:scale-110 
+        focus:scale-110 hover:scale-110 hover:bg-
         active:scale-105 
         disabled:scale-100 disabled:bg-opacity-65
         mt-5
