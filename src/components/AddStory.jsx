@@ -25,14 +25,14 @@ const AddStory = () => {
     <div className='bg-black text-white p-5 flex flex-col w-4/12'>
       <h3 className='text-2xl only:font-medium mb-[1rem]'>Add a story</h3>
       <form onSubmit={handleSubmit}>
-        <div className='flex flex-col p-5 bg-gray-800'>
-          <input className='text-black'
+        <div className='flex flex-col p-5 '>
+          <input className='text-black m-2'
                               type="text" 
                               name="title" 
                               placeholder="title"
                               required 
                        />
-          <input className='text-black'
+          <input className='text-black w-fit m-2'
                              type="number" 
                              name="wordCount" 
                              placeholder="word count"

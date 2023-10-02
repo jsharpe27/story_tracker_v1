@@ -83,7 +83,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
   const storyCardElements = storyData.map(function(story){
     return (
       <div key={story.id} className='p-3 flex flex-col border border-black m-[.5rem]
-      bg-gray-500 text-white flex-wrap w-1/4 '>
+      bg-gray-500 text-white flex-wrap w-1/6 '>
           { story.editing ? <input type='text'
                                    className='text-black'       
                                    value={editTitle} 
@@ -144,7 +144,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
   return (
     <>
       { storiesExist ? <div><h2 className='text-white text-3xl font-serif mt-[3rem]'>Your stories:</h2> <div className='p-4 flex'>{storyCardElements}</div>
-      </div> : <p>You have no stories tracked (yet).</p>}
+      </div> : <p className='text-white text-3xl font-serif mt-[1rem] mb-[1rem]'>You have no stories tracked (yet).</p>}
     </>
   )
 }

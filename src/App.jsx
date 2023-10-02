@@ -76,8 +76,10 @@ function App() {
           }}
           >
             <UserHeader />
-            <Card />
-            <AddStory />
+            <div className='flex flex-col items-center mt-10'>
+              <Card />
+              <AddStory />
+            </div>
           </main>
         }
     </AuthProvider>
