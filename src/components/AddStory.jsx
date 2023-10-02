@@ -3,6 +3,7 @@ import { AuthContext } from '../context/AuthContext'
 import { addDoc } from 'firebase/firestore'
 import { storiesCollection } from '../firebase'
 
+
 const AddStory = () => {
   const {authUser} = useContext(AuthContext)
 
@@ -21,10 +22,10 @@ const AddStory = () => {
   }
 
   return (
-    <div className='bg-blue-950 text-white p-10 flex flex-col items-center'>
-      <h3 className='text-xl only:font-medium mb-[2rem]'>Add a story below</h3>
+    <div className='bg-black text-white p-5 flex flex-col w-4/12'>
+      <h3 className='text-2xl only:font-medium mb-[1rem]'>Add a story</h3>
       <form onSubmit={handleSubmit}>
-        <div className='flex flex-col p-5 bg-gray-700'>
+        <div className='flex flex-col p-5 bg-gray-800'>
           <input className='text-black'
                               type="text" 
                               name="title" 
@@ -37,7 +38,7 @@ const AddStory = () => {
                              placeholder="word count"
                              required
                       />
-          <label>Is Submitted?<input className='text-black'
+          <label className='text-white'>Is Submitted?<input className='text-black'
                                      type="radio" 
                                      name="isSubmitted" 
                                      value={true}
@@ -45,7 +46,7 @@ const AddStory = () => {
                               />
           Yes
           </label>
-          <label><input type="radio" 
+          <label className='text-white'><input type="radio" 
                         name="isSubmitted" 
                         value={false}
                         required 
@@ -60,7 +61,14 @@ const AddStory = () => {
                                  required 
             />
         </div>
-        <button className='bg-green-200 text-black p-2 rounded-md mt-[1rem]'>Add Story</button>
+        <button className='h-[2rem] w-[7rem] bg-gray-800
+        text-white font-medium gap-2 outline-none transition-all 
+        focus:scale-110 hover:scale-110 
+        active:scale-105 
+        disabled:scale-100 disabled:bg-opacity-65
+        mt-5
+        '
+        >Add Story</button>
       </form>
     </div>
   )

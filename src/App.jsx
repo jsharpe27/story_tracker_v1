@@ -69,8 +69,9 @@ function App() {
         { start &&
           <main>
             <UserHeader />
-            <AddStory />
             <Card />
+            <AddStory />
+            
           </main>
         }
     </AuthProvider>

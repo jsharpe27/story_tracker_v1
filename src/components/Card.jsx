@@ -9,6 +9,7 @@ const Card = () => {
   const [editWordCount, setEditWordCount] = useState('')
   const [editIsSubmitted, setEditIsSubmitted] = useState('')
   const [editDescription, setEditDescription] = useState('')
+  const [storiesExist, setStoriesExist] = useState(false)
 
   useEffect(() => {
     const unsubscribe = onSnapshot(storiesCollection, function(snapshot){
@@ -23,6 +24,7 @@ const Card = () => {
                 id: doc.id
                 }
             userStoriesArray.push(userStoryObject)
+            setStoriesExist(true)
           }
        })
        setStoryData(userStoriesArray)
@@ -33,6 +35,10 @@ const Card = () => {
   async function deleteStory(storyId){
     const docRef = doc(db, "stories", storyId)
     await deleteDoc(docRef)
+    console.log(storyData)
+    if (storyData.length === 0){
+      setStoriesExist(false)
+    }
  }
 
  function handleEditClick(storyId){
@@ -124,9 +130,10 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
   })
 
   return (
-      <div className='bg-yellow-100 mt-[2rem] hover:cursor-pointer p-4 flex'> 
-        {storyCardElements}
-      </div>
+    <>
+      { storiesExist ? <div><h2>Your stories:</h2> <div className='mt-[2rem] hover:cursor-pointer p-4 flex'>{storyCardElements}</div>
+      </div> : <p>You have no stories tracked (yet).</p>}
+    </>
   )
 }
 
