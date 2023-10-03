@@ -21,10 +21,10 @@ const SignUp = () => {
 
   return (
     <div className=' text-white text-md'>
-        <form className='flex flex-col mt-5' onSubmit={signUp}>
+        <form className='flex flex-col' onSubmit={signUp}>
             <h3 className='text-md'>Don't have an account? 
             {' '}<span className='underline font-medium text-2xl'>Sign Up.</span></h3>
-            <label htmlFor='email'>Email</label>
+            <label className='mt-5' htmlFor='email'>Email</label>
                 <input className='text-black  p-1'
                 type='email' id={nanoid()}
                 placeholder='Enter your email' 

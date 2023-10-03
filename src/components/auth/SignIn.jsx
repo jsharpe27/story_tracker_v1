@@ -22,7 +22,7 @@ const SignIn = () => {
 
   return (
     <div className=' text-white p-8'>
-        <form className='flex flex-col items-center' onSubmit={signIn}>
+        <form className='flex flex-col items-center mt-[-2rem]' onSubmit={signIn}>
             <label htmlFor='email'></label>
                 <input className='text-black m-2 p-2'
                 type='email' id={nanoid()}

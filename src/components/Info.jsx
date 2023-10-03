@@ -19,8 +19,8 @@ const fadeInAnimationVariants = {
 
 export default function Info() {
   return (
-    <div className='flex flex-col items-center justify-center'>
-    <motion.div className='text-5xl text-white mt-10'
+    <div className='flex flex-col items-center justify-center md:bg-none  '>
+    <motion.div className='text-5xl text-white mt-5'
                  initial={{ y: 0, x: 500, opacity: 0}}
                  animate={{ y: 0, x: 0, opacity: 1}}
                  transition={{duration: 0.3}}
@@ -33,7 +33,7 @@ export default function Info() {
                   >
                     {
                         infoListItems.map((item, index) => (
-                            <motion.li className=' borderBlack rounded-xl px-5 py-3 md:text-3xl text-lg'
+                            <motion.li className=' borderBlack rounded-xl px-5 py-3  md:text-3xl text-lg'
                             key={item.id}
                             custom={index}
                             variants={fadeInAnimationVariants}

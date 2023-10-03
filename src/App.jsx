@@ -49,9 +49,11 @@ function App() {
                     </div>
                 </div>
                 
-                <div className='flex flex-col md:flex justify-center items-center gap-10 align'>
+                <div className='flex flex-col justify-center items-center bg-black md:bg-inherit sm:bg-inherit gap-10 '>
                   <Info />
-                  <SignUp />
+                  <div className='md:bg-black p-10'>
+                    <SignUp />
+                  </div>
                 </div>
               </div>
               
