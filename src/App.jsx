@@ -33,7 +33,7 @@ function App() {
               <div
                 className='absolute inset-0'
                 style={{
-                  backgroundImage: "url('./src/assets/typewriter.jpg')",
+                  backgroundImage: "url('../public/assets/typewriter.jpg')",
                   backgroundSize: 'cover',
                   backgroundRepeat: 'no-repeat',
                   backgroundPosition: 'center',
@@ -63,7 +63,7 @@ function App() {
         { start &&
           <main className='absolute inset-0'
           style={{
-            backgroundImage: "url('./src/assets/editing.jpg')",
+            backgroundImage: "url('../public/assets/editing.jpg')",
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
