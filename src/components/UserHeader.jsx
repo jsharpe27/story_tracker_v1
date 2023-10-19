@@ -2,6 +2,7 @@ import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 import SignOut from './auth/SignOut'
 
+
 export default function UserHeader() {
   
     const {authUser} = useContext(AuthContext)
@@ -12,6 +13,7 @@ export default function UserHeader() {
           { authUser ? <h1 className='text-3xl'>Welcome, {authUser.email}</h1> : "" }
       </div>
       <SignOut />
+      
     </div>
   )
 }
