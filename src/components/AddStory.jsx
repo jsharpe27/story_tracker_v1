@@ -5,6 +5,7 @@ import { storiesCollection } from '../firebase'
 
 
 const AddStory = () => {
+  
   const {authUser} = useContext(AuthContext)
 
   async function addStory(storyObject){

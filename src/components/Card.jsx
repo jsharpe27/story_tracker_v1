@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from 'react'
 import { onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "../firebase"
 import { motion } from 'framer-motion'
+import { handleSaveClick } from './utils/utils'
+import { nanoid } from 'nanoid'
 
 const Card = () => {
   const [storyData, setStoryData] = useState([])
@@ -58,33 +60,10 @@ const Card = () => {
     })) 
 }
 
-async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, editDescription){ 
-  const updatedStoryObject = {
-    id: id,
-    title: editTitle, 
-    wordCount: editWordCount,
-    isSubmitted: editIsSubmitted,
-    description: editDescription
-  }
-
-    if (Object.values(updatedStoryObject).every(Boolean)) {
-
-    try {
-    const docRef = doc(db, "stories", id)
-    await setDoc(docRef, updatedStoryObject, { merge: true })
-    console.log('saved')
-  } catch (error){
-    console.log(error)
-  }
-  } else {
-  console.log('please fill out all fields')
-}
-}
-
-  const storyCardElements = storyData.map(function(story, index){
+  const storyCardElements = storyData.map(function(story){
     return (
       <>
-      { story.editing ? <div key={index} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+      { story.editing ? <div key={nanoid()} className='p-5 flex flex-col border rounded border-black m-[.5rem]
       bg-gray-700 text-white flex-wrap  items-center'>
           { story.editing ? <input type='text'
                                    className='text-black border border-black'       
@@ -150,7 +129,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
             onClick={() => deleteStory(story.id)}>Delete Story</button> 
           </div>
       </div> :
-                <div key={index} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+                <div key={nanoid()} className='p-5 flex flex-col border rounded border-black m-[.5rem]
                 bg-white text-black flex-wrap  items-center'>
                     { story.editing ? <input type='text'
                                              className='text-black border border-black'       
