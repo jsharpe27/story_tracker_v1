@@ -34,7 +34,7 @@ export default function Info() {
                     {
                         infoListItems.map((item, index) => (
                             <motion.li className=' borderBlack rounded-xl px-5 py-3  md:text-3xl text-lg'
-                            key={item.id}
+                            key={index}
                             custom={index}
                             variants={fadeInAnimationVariants}
                             initial='initial'
