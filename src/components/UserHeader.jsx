@@ -1,6 +1,7 @@
 import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 import SignOut from './auth/SignOut'
+import { Link } from 'react-router-dom'
 
 export default function UserHeader() {
   
@@ -12,6 +13,7 @@ export default function UserHeader() {
           { authUser ? <h1 className='text-3xl'>Welcome, {authUser.email}</h1> : "" }
       </div>
       <SignOut />
+      <Link to='/editor'>Editor</Link>
     </div>
   )
 }
