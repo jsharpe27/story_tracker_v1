@@ -5,7 +5,7 @@ export default function Editor() {
   return (
     <>
         <h1 className='text-2xl'>Welcome to the Editor</h1>
-        <Link to='/'>Home</Link>
+        <Link to='/'>Back to story tracker</Link>
     </>
   )
 }

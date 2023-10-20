@@ -81,10 +81,10 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
 }
 }
 
-  const storyCardElements = storyData.map(function(story){
+  const storyCardElements = storyData.map(function(story, index){
     return (
       <>
-      { story.editing ? <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+      { story.editing ? <div key={index} className='p-5 flex flex-col border rounded border-black m-[.5rem]
       bg-gray-700 text-white flex-wrap  items-center'>
           { story.editing ? <input type='text'
                                    className='text-black border border-black'       
@@ -150,7 +150,7 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
             onClick={() => deleteStory(story.id)}>Delete Story</button> 
           </div>
       </div> :
-                <div key={story.id} className='p-5 flex flex-col border rounded border-black m-[.5rem]
+                <div key={index} className='p-5 flex flex-col border rounded border-black m-[.5rem]
                 bg-white text-black flex-wrap  items-center'>
                     { story.editing ? <input type='text'
                                              className='text-black border border-black'       

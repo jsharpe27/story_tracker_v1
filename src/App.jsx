@@ -23,12 +23,17 @@ function App() {
 },[])
 
   return (
-    <>
-    <AuthProvider>
-        { !start && <HomePage /> }
-        { start && <UserPage />}
-    </AuthProvider>
-    </>
+    <Router>
+      <AuthProvider>
+          { !start && <HomePage /> }
+          {start && (
+          <Routes>
+            <Route path="/" element={<UserPage />} />
+            <Route path="/editor" element={<Editor />} />
+          </Routes>
+        )}
+      </AuthProvider>
+    </Router>
   )
 }
 
