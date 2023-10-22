@@ -14,4 +14,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app)
 export const storiesCollection = collection(db, "stories")
+export const notesCollection = collection(db, "notes")
 export const auth = getAuth(app);
