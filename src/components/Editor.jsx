@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useNotesContext } from '../context/NotesContext'
-import { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext'
+import { useAuthContext } from '../context/AuthContext'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { Link } from 'react-router-dom'
 import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
 import { notesCollection } from '../firebase'
-import { onSnapshot, addDoc, deleteDoc } from 'firebase/firestore'
+import { onSnapshot, addDoc } from 'firebase/firestore'
 
 export default function Editor() {
   const [value, setValue] = useState('')
   const [notesExist, setNotesExist] = useState(false)
   const { notesData, setNotesData} = useNotesContext()
-  const {authUser} = useContext(AuthContext)
+  const {authUser} = useAuthContext()
 
   const module = {
     toolbar: toolBarOptions
@@ -23,6 +22,8 @@ export default function Editor() {
   async function addNote(noteObject){
     await addDoc(notesCollection, noteObject)
   }
+
+ 
 
   function handleSaveNote(){
     function stripHtmlTags(str){
@@ -38,10 +39,6 @@ export default function Editor() {
       userId: authUser.uid
     }
     addNote(note)
-  }
-
-  function handleDeleteNote(){
-
   }
 
   useEffect(() => {
@@ -87,16 +84,7 @@ export default function Editor() {
             onClick={handleSaveNote}
             >
             Save note</button>
-            <button className='bottom-0 right-0 p-3
-            flex justify-center items-center
-            w-[7rem] bg-red-200 
-          text-black outline-none transition-all 
-          hover:bg-black hover:text-red-500
-            active:scale-105 
-            disabled:scale-100 disabled:bg-opacity-65'
-            onClick={handleDeleteNote}
-            >
-            Delete note</button>
+            
           </div>
       </main>
   </div>
