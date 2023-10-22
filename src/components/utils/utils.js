@@ -24,6 +24,8 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     }
 }
 
+
+
 const toolBarOptions = [
   ['bold', 'italic', 'underline'],        // toggled buttons
   ['blockquote'],

@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState, useEffect, useContext } from 'react'
-import { onSnapshot, doc, deleteDoc, setDoc } from 'firebase/firestore'
+import { useState, useEffect } from 'react'
+import { onSnapshot, doc, deleteDoc } from 'firebase/firestore'
 import { storiesCollection, db } from "../firebase"
 import { motion } from 'framer-motion'
 import { handleSaveClick } from './utils/utils'
@@ -38,7 +38,6 @@ const Card = () => {
   async function deleteStory(storyId){
     const docRef = doc(db, "stories", storyId)
     await deleteDoc(docRef)
-    console.log(storyData)
     if (storyData.length === 0){
       setStoriesExist(false)
     }
