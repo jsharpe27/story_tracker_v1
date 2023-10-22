@@ -24,6 +24,21 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     }
 }
 
+function handleSaveNote(){
+  function stripHtmlTags(str){
+    if ((str===null) || (str===''))
+        return false;
+    else
+    str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  }
+  const plainText = stripHtmlTags(value)
+  const note = {
+    body: plainText,
+    userId: authUser.uid
+  }
+  addNote(note)
+}
 
 
 const toolBarOptions = [
@@ -44,4 +59,4 @@ const toolBarOptions = [
   ['clean']                                         // remove formatting button
 ];
 
-    export { handleSaveClick, toolBarOptions }
+    export { handleSaveClick, toolBarOptions, handleSaveNote }

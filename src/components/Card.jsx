@@ -202,7 +202,7 @@ const Card = () => {
     <>
       { storiesExist ? 
       <div className='text-center'>
-        <h2 className='text-white text-5xl font-bold font-serif mt-[3rem] '>Your stories:</h2> 
+        <h2 className='text-white text-5xl font-bold font-serif mt-[3rem] '>Tracked stories:</h2> 
         <motion.div className='p-3 flex'
           initial={{ opacity: 0, scale:0 }}
           animate={{ opacity: 1, scale:1 }}

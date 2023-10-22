@@ -8,6 +8,7 @@ import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
 import { notesCollection } from '../firebase'
 import { onSnapshot, addDoc } from 'firebase/firestore'
+import { handleSaveNote } from './utils/utils'
 
 export default function Editor() {
   const [value, setValue] = useState('')
@@ -21,24 +22,6 @@ export default function Editor() {
 
   async function addNote(noteObject){
     await addDoc(notesCollection, noteObject)
-  }
-
- 
-
-  function handleSaveNote(){
-    function stripHtmlTags(str){
-      if ((str===null) || (str===''))
-          return false;
-      else
-      str = str.toString();
-      return str.replace(/<[^>]*>/g, '');
-    }
-    const plainText = stripHtmlTags(value)
-    const note = {
-      body: plainText,
-      userId: authUser.uid
-    }
-    addNote(note)
   }
 
   useEffect(() => {
@@ -68,7 +51,7 @@ export default function Editor() {
       <main className='min-h-screen flex flex-col
             items-center p-24 
           bg-gray-400'>
-          <Link to='/' className='underline'>Back to story tracker</Link>
+          <Link to='/' className='underline text-lg'>Back to story tracker</Link>
           <h1 className='text-5xl font-semibold'>Brainstorm here</h1>
 
           <div className='mt-10'>
