@@ -20,7 +20,7 @@ export default function Editor() {
       <SavedNotesBar />
       <main className='min-h-screen flex flex-col
             items-center p-24 
-          bg-gray-200'>
+          bg-gray-400'>
           <Link to='/' className='underline'>Back to story tracker</Link>
           <h1 className='text-5xl font-semibold'>Brainstorm here</h1>
 
