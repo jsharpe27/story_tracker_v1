@@ -22,6 +22,24 @@ async function handleSaveClick(id, editTitle, editWordCount, editIsSubmitted, ed
     } else {
     console.log('please fill out all fields')
     }
-  }
+}
 
-    export { handleSaveClick }
+const toolBarOptions = [
+  ['bold', 'italic', 'underline'],        // toggled buttons
+  ['blockquote'],
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+    export { handleSaveClick, toolBarOptions }
