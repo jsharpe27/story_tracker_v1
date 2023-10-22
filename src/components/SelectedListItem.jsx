@@ -8,9 +8,7 @@ import { useNotesContext } from '../context/NotesContext'
 
 export default function SelectedListItem() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const [test, setTest] = React.useState('hello')
-
-  const { notesData, setNotesData} = useNotesContext()
+  const { notesData } = useNotesContext()
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -19,10 +17,11 @@ export default function SelectedListItem() {
   const listItemElements = notesData.map((note) => {
     return (
       <ListItemButton
+        key={note.id}
         selected={selectedIndex === 0}
         onClick={(event) => handleListItemClick(event, 0)}
       >
-        <ListItemText primary={note.title} />
+        <ListItemText primary={note.body} />
       </ListItemButton>
     )
     })
