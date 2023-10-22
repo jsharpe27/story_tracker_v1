@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react'
+import { useNotesContext } from '../context/NotesContext'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { Link } from 'react-router-dom'
 import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
-import { NotesProvider } from '../context/NotesContext'
+
 import { notesCollection } from '../firebase'
 import { onSnapshot, doc, deleteDoc } from 'firebase/firestore'
+
 export default function Editor() {
   const [value, setValue] = useState('')
-  const [notesData, setNotesData] = useState([])
   const [notesExist, setNotesExist] = useState(false)
+
+  const { notesData, setNotesData} = useNotesContext()
 
   const module = {
     toolbar: toolBarOptions
@@ -52,21 +55,18 @@ export default function Editor() {
 
   return (
   <div>
-    <NotesProvider>
-      <SavedNotesBar />
+      {notesExist ? <SavedNotesBar /> : <h1>Your notes will appear here</h1>}
       <main className='min-h-screen flex flex-col
             items-center p-24 
           bg-gray-400'>
           <Link to='/' className='underline'>Back to story tracker</Link>
           <h1 className='text-5xl font-semibold'>Brainstorm here</h1>
 
-
           <div className='mt-10'>
               <ReactQuill modules={module} theme="snow" value={value} onChange={setValue} />                
           </div>
           <button onClick={handleSaveNote}>Save note</button>   
       </main>
-    </NotesProvider>
   </div>
   )
 
