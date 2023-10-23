@@ -18,14 +18,15 @@ export default function SelectedListItem() {
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
+        console.log(notesData[index])
   };
 
-  const listItemElements = notesData.map((note) => {
+  const listItemElements = notesData.map((note, index) => {
     return (
       <ListItemButton
         key={note.id}
-        selected={selectedIndex === 0}
-        onClick={(event) => handleListItemClick(event, 0)}
+        selected={selectedIndex === index}
+        onClick={(event) => handleListItemClick(event, index)}
       >
         <ListItemText primary={note.body} />
         <button className='bottom-0 right-0 p-1
