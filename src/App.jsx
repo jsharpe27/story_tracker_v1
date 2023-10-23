@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-
 import HomePage from './components/HomePage'
 import UserPage from './components/UserPage'
 import Editor from './components/Editor'
 import { AuthProvider } from './context/AuthContext'
+import { NotesProvider } from './context/NotesContext'
 import { onAuthStateChanged } from 'firebase/auth'
 import { auth } from './firebase'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -25,6 +25,7 @@ function App() {
   return (
     <Router>
       <AuthProvider>
+      <NotesProvider>
           { !start && <HomePage /> }
           {start && (
           <Routes>
@@ -32,6 +33,7 @@ function App() {
             <Route path="/editor" element={<Editor />} />
           </Routes>
         )}
+      </NotesProvider>
       </AuthProvider>
     </Router>
   )
