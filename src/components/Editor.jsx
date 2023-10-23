@@ -8,7 +8,6 @@ import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
 import { notesCollection } from '../firebase'
 import { onSnapshot, addDoc } from 'firebase/firestore'
-import { handleSaveNote } from './utils/utils'
 
 export default function Editor() {
   const [value, setValue] = useState('')
@@ -22,6 +21,22 @@ export default function Editor() {
 
   async function addNote(noteObject){
     await addDoc(notesCollection, noteObject)
+  }
+
+  function handleSaveNote(){
+    function stripHtmlTags(str){
+      if ((str===null) || (str===''))
+          return false;
+      else
+      str = str.toString();
+      return str.replace(/<[^>]*>/g, '');
+    }
+    const plainText = stripHtmlTags(value)
+    const note = {
+      body: plainText,
+      userId: authUser.uid
+    }
+    addNote(note)
   }
 
   useEffect(() => {
