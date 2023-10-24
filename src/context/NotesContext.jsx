@@ -9,6 +9,8 @@ export const NotesProvider = ({ children }) => {
     const values = {
         notesData,
         setNotesData,
+        value,
+        setValue
     }
 
     return (

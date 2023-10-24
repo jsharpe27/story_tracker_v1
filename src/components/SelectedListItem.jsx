@@ -9,16 +9,16 @@ import { db } from '../firebase'
 
 export default function SelectedListItem() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  const { notesData } = useNotesContext()
+  const { notesData, setNotesData, value, setValue } = useNotesContext()
 
   async function handleDeleteNote(noteId){
     const docRef = doc(db, "notes", noteId)
     await deleteDoc(docRef)
  }
 
-  const handleListItemClick = (event, index) => {
+  const handleListItemClick = (event, index, selectedNoteText) => {
     setSelectedIndex(index);
-        console.log(notesData[index])
+    setValue(selectedNoteText);
   };
 
   const listItemElements = notesData.map((note, index) => {
@@ -26,7 +26,7 @@ export default function SelectedListItem() {
       <ListItemButton
         key={note.id}
         selected={selectedIndex === index}
-        onClick={(event) => handleListItemClick(event, index)}
+        onClick={(event) => handleListItemClick(event, index, note.body)}
       >
         <ListItemText primary={note.body} />
         <button className='bottom-0 right-0 p-1

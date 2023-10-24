@@ -10,10 +10,9 @@ import { notesCollection } from '../firebase'
 import { onSnapshot, addDoc } from 'firebase/firestore'
 
 export default function Editor() {
-  const [value, setValue] = useState('')
-  const [notesExist, setNotesExist] = useState(false)
-  const { notesData, setNotesData} = useNotesContext()
+  const { notesData, setNotesData, value, setValue } = useNotesContext()
   const {authUser} = useAuthContext()
+  const [notesExist, setNotesExist] = useState(false)
 
   const module = {
     toolbar: toolBarOptions
@@ -59,6 +58,8 @@ export default function Editor() {
     })
     return unsubscribe
   },[])
+
+
 
   return (
   <div>
