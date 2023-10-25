@@ -22,14 +22,15 @@ export default function Editor() {
     await addDoc(notesCollection, noteObject)
   }
 
+  function stripHtmlTags(str){
+    if ((str===null) || (str===''))
+        return false;
+    else
+    str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  }
+
   function handleAddNote(){
-    function stripHtmlTags(str){
-      if ((str===null) || (str===''))
-          return false;
-      else
-      str = str.toString();
-      return str.replace(/<[^>]*>/g, '');
-    }
     const plainText = stripHtmlTags(value)
     const note = {
       body: plainText,
@@ -38,8 +39,14 @@ export default function Editor() {
     addNote(note)
   }
 
-  async function handleSaveNote(){ 
-   console.log()
+  async function handleSaveNote(noteId){ 
+   const plainText = stripHtmlTags(value)
+   const note = {
+    body: plainText,
+    userId: authUser.uid
+    }
+    console.log(value)
+    console.log(notesData)
   }
 
   useEffect(() => {
