@@ -22,7 +22,7 @@ export default function Editor() {
     await addDoc(notesCollection, noteObject)
   }
 
-  function handleSaveNote(){
+  function handleAddNote(){
     function stripHtmlTags(str){
       if ((str===null) || (str===''))
           return false;
@@ -36,6 +36,10 @@ export default function Editor() {
       userId: authUser.uid
     }
     addNote(note)
+  }
+
+  async function handleSaveNote(){ 
+   console.log()
   }
 
   useEffect(() => {
@@ -59,7 +63,7 @@ export default function Editor() {
     return unsubscribe
   },[])
 
-
+ 
 
   return (
   <div>
@@ -80,9 +84,17 @@ export default function Editor() {
             outline-none transition-all font-bold hover:font-bold
           hover:bg-blue-100 hover:text-black 
             disabled:scale-100 disabled:bg-opacity-65'           
+            onClick={handleAddNote}
+            >
+            Add Note</button>
+            <button className='bg-white text-black p-3
+            mt-5 flex w-[7rem] justify-center active:scale-105 
+            outline-none transition-all font-bold hover:font-bold
+          hover:bg-blue-100 hover:text-black 
+            disabled:scale-100 disabled:bg-opacity-65'           
             onClick={handleSaveNote}
             >
-            Save note</button>
+            Save changes</button>
             
           </div>
       </main>
