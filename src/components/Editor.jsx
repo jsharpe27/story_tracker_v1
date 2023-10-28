@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
 import { notesCollection } from '../firebase'
-import { onSnapshot, addDoc } from 'firebase/firestore'
+import { onSnapshot, addDoc, doc, setDoc } from 'firebase/firestore'
 
 export default function Editor() {
-  const { notesData, setNotesData, selectedNoteId, value, setValue } = useNotesContext()
+  const { setNotesData, selectedNoteId, value, setValue } = useNotesContext()
   const {authUser} = useAuthContext()
   const [notesExist, setNotesExist] = useState(false)
 
@@ -46,8 +46,14 @@ export default function Editor() {
     id: noteId,
     userId: authUser.uid
     }
-    console.log(plainText)
-    console.log(noteId)
+
+    try {
+      const docRef = doc(notesCollection, noteId);
+      await setDoc(docRef, note);
+      console.log('Document updated successfully!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
   }
 
   useEffect(() => {

@@ -30,6 +30,7 @@ export default function SelectedListItem() {
     setSelectedNoteId(noteId)
   };
 
+
   const listItemElements = notesData.map((note, index) => {
     return (
       <ListItemButton
@@ -37,7 +38,7 @@ export default function SelectedListItem() {
         selected={selectedIndex === index}
         onClick={() => handleListItemClick(index, note.body, note.id)}
       >
-        <ListItemText primary={note.body} />
+        <ListItemText primary={note.body.slice(0, 10) + (note.body.length > 10 ? '...' : '')} />
         <button className='bottom-0 right-0 p-1
             flex justify-center items-center
             bg-red-200 
