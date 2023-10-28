@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom'
 import SavedNotesBar from './SavedNotesBar'
 import { toolBarOptions } from './utils/utils'
 import { notesCollection } from '../firebase'
-import { onSnapshot, addDoc } from 'firebase/firestore'
+import { onSnapshot, addDoc, doc, setDoc } from 'firebase/firestore'
 
 export default function Editor() {
-  const { notesData, setNotesData, value, setValue } = useNotesContext()
+  const { setNotesData, selectedNoteId, value, setValue } = useNotesContext()
   const {authUser} = useAuthContext()
   const [notesExist, setNotesExist] = useState(false)
 
@@ -22,14 +22,15 @@ export default function Editor() {
     await addDoc(notesCollection, noteObject)
   }
 
+  function stripHtmlTags(str){
+    if ((str===null) || (str===''))
+        return false;
+    else
+    str = str.toString();
+    return str.replace(/<[^>]*>/g, '');
+  }
+
   function handleAddNote(){
-    function stripHtmlTags(str){
-      if ((str===null) || (str===''))
-          return false;
-      else
-      str = str.toString();
-      return str.replace(/<[^>]*>/g, '');
-    }
     const plainText = stripHtmlTags(value)
     const note = {
       body: plainText,
@@ -38,8 +39,21 @@ export default function Editor() {
     addNote(note)
   }
 
-  async function handleSaveNote(){ 
-   console.log()
+  async function handleSaveNote(noteId){ 
+   const plainText = stripHtmlTags(value)
+   const note = {
+    body: plainText,
+    id: noteId,
+    userId: authUser.uid
+    }
+
+    try {
+      const docRef = doc(notesCollection, noteId);
+      await setDoc(docRef, note);
+      console.log('Document updated successfully!');
+    } catch (error) {
+      console.error('Error updating document: ', error);
+    }
   }
 
   useEffect(() => {
@@ -92,7 +106,7 @@ export default function Editor() {
             outline-none transition-all font-bold hover:font-bold
           hover:bg-blue-100 hover:text-black 
             disabled:scale-100 disabled:bg-opacity-65'           
-            onClick={handleSaveNote}
+            onClick={() => handleSaveNote(selectedNoteId)}
             >
             Save changes</button>
             
