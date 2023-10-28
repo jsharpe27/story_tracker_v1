@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../firebase'
 
-const SignIn = () => {
+const SignIn = ({notify}) => {
     const { email, setEmail } = useContext(AuthContext)
     const { password, setPassword } = useContext(AuthContext)
 
@@ -18,6 +18,7 @@ const SignIn = () => {
         }).catch((error) => {
             console.log(error)
         })
+        notify()
     }
 
   return (

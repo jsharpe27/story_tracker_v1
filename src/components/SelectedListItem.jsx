@@ -50,7 +50,7 @@ export default function SelectedListItem() {
             >
             Delete note</button>
       </ListItemButton>
-    )
+      )
     })
 
   return (

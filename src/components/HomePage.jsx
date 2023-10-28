@@ -3,6 +3,9 @@ import Header from './Header'
 import Info from './Info'
 import SignIn from './auth/SignIn'
 import SignUp from './auth/SignUp'
+import toast, { Toaster } from 'react-hot-toast'
+
+const notify = () => toast('signed in successful');
 
 export default function HomePage() {
   return (
@@ -23,7 +26,8 @@ export default function HomePage() {
 
                 <div className='flex flex-col justify-center mt-[-3rem]'>
                     <div className='flex flex-col items-center text-center'>
-                      <SignIn />
+                      <SignIn notify={notify}/>
+                      <Toaster position='top-right' />
                     </div>
                 </div>
                 
