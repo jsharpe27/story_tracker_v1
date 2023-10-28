@@ -10,7 +10,7 @@ import { notesCollection } from '../firebase'
 import { onSnapshot, addDoc } from 'firebase/firestore'
 
 export default function Editor() {
-  const { notesData, setNotesData, value, setValue } = useNotesContext()
+  const { notesData, setNotesData, selectedNoteId, value, setValue } = useNotesContext()
   const {authUser} = useAuthContext()
   const [notesExist, setNotesExist] = useState(false)
 
@@ -43,10 +43,11 @@ export default function Editor() {
    const plainText = stripHtmlTags(value)
    const note = {
     body: plainText,
+    id: noteId,
     userId: authUser.uid
     }
-    console.log(value)
-    console.log(notesData)
+    console.log(plainText)
+    console.log(noteId)
   }
 
   useEffect(() => {
@@ -99,7 +100,7 @@ export default function Editor() {
             outline-none transition-all font-bold hover:font-bold
           hover:bg-blue-100 hover:text-black 
             disabled:scale-100 disabled:bg-opacity-65'           
-            onClick={handleSaveNote}
+            onClick={() => handleSaveNote(selectedNoteId)}
             >
             Save changes</button>
             
